@@ -1,20 +1,29 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { StyleSheet, Text, SafeAreaView } from 'react-native';
+import { Menu } from './components/menubar';
+import { LargeButton } from './components/buttons';
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+
+    const handleMainPress = () => {
+        console.log("Main button pressed");
+    };
+
+    return (
+        <SafeAreaView style={styles.container}>
+            <Text>Open up App.js to start working on your app</Text>
+            <Menu>
+                <LargeButton text="+" handlePressed={handleMainPress} />
+            </Menu>
+        </SafeAreaView>
+    );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
 });
