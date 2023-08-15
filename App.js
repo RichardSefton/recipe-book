@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, SafeAreaView } from 'react-native';
 import { Menu } from './components/menubar';
 import { LargeButton } from './components/buttons';
+import { RecipeList } from './components/recipelist';
 
 export default function App() {
 
@@ -11,7 +12,7 @@ export default function App() {
 
     return (
         <SafeAreaView style={styles.container}>
-            <Text>Open up App.js to start working on your app</Text>
+            <RecipeList />
             <Menu>
                 <LargeButton text="+" handlePressed={handleMainPress} />
             </Menu>
