@@ -1,24 +1,27 @@
-import { ScrollView, View, Text } from "react-native";
+import { useState, useEffect, useContext } from "react";
+import { ScrollView, View } from "react-native";
 import { recipeListStyle } from "./style";
 import RecipeCard from "./RecipeCard";
+import { DatabaseContext, getRecipes } from "../../datastore";
 
 const RecipeList = ({ navigation }) => {
-    const arr = new Array(100).fill(0).map((_, i) => ({ id: i, title: "Recipe", description: "This is a recipe...." }));
-    
+    const [recipes, setRecipes] = useState([]);
+
+    const { conn } = useContext(DatabaseContext);
+
+    useEffect(() => {
+        console.log("Home screen mounted");
+        getRecipes(conn)
+            .then((r) => setRecipes(r))
+            .catch((error) => console.error(error));
+    }, []);
+
     return (
         <View style={recipeListStyle.container}>
-            <ScrollView
-                scrollEnabled={true}
-            >
-                {
-                    arr.map(r => (
-                        <RecipeCard 
-                            key={r.id} 
-                            recipe={r} 
-                            navigation={navigation}/>
-                        )
-                    )
-                }
+            <ScrollView scrollEnabled={true}>
+                {recipes.map((r) => (
+                    <RecipeCard key={r.id} recipe={r} navigation={navigation} />
+                ))}
             </ScrollView>
         </View>
     );

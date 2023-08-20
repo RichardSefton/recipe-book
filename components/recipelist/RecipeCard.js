@@ -9,7 +9,7 @@ const RecipeCard = ({ recipe, navigation }) => {
     return (
         <View style={recipeCardStyle.container}>
             <View style={recipeCardStyle.details}>
-                <Text style={recipeCardStyle.titleText}>{recipe.title}</Text>
+                <Text style={recipeCardStyle.titleText}>{recipe.name}</Text>
                 <Text style={recipeCardStyle.descriptionText}>
                     {recipe.description}
                 </Text>

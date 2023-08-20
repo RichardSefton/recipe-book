@@ -1,7 +1,9 @@
-import Home from "./Home";
+import RecipeList from "./RecipeList";
 import Recipe from "./Recipe";
+import NewRecipe from "./NewRecipe";
 
 export {
-    Home,
+    RecipeList,
     Recipe,
+    NewRecipe,
 }
