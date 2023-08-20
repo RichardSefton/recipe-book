@@ -1,34 +1,51 @@
-import { useMemo, useContext } from "react";
-import { View, Button } from "react-native";
+import { useContext, useState, useMemo, useEffect } from "react";
+import { View } from "react-native";
 import { menuStyle } from './styles'
-import { DatabaseContext, openDb, createTables } from '../../datastore';
+import { DatabaseContext } from '../../datastore';
+import { useNavigation, useRoute } from "@react-navigation/native";
+import { LargeButton, buttonImages } from "../buttons";
 
-const Menu = ({ children }) => {
+const Menu = ({ children, navigationRef }) => {
     //return true if in development mode
-    const development = useMemo(() => {
-        return false
-        return __DEV__;
+    const { conn, setConn } = useContext(DatabaseContext);
+    const [route, setRoute] = useState('');
+
+    const navigation = useNavigation();
+    // const route = useRoute();
+
+    useEffect(() => {
+        setRoute(navigationRef.current.getCurrentRoute().name);
+        navigationRef.current.addListener('state', (e) => {
+            setRoute(e.data?.state?.routes?.[e.data?.state?.index]?.name)
+        });
     }, []);
 
-    const { conn, setConn } = useContext(DatabaseContext);
-
-    const refreshDatabase = () => {
-        conn.closeAsync();
-        conn.deleteAsync();
-        const newConn = openDb();
-        setConn(newConn);
-        createTables(newConn).catch((error) => console.error(error));
+    const handleNewRecipe = () => {
+        navigation.navigate("NewRecipe");
     };
+
+    const handleSaveRecipe = () => {
+        console.log("save recipe");
+    };
+
+    const navButtons = useMemo(() => {
+        switch(route) {
+            case 'NewRecipe': return (
+                <>
+                    <LargeButton imageUri={buttonImages.SAVE} useImage={true} handlePressed={handleSaveRecipe} />
+                </>
+            );
+            default: return (
+                <>
+                    <LargeButton text="+" handlePressed={handleNewRecipe} />
+                </>
+            );
+        }
+    }, [route]);
 
     return (
         <View style={menuStyle.bar}>
-            {development && (
-                <Button
-                    onPress={refreshDatabase}
-                    title="Refresh Database"
-                />
-            )}
-            {children}
+            {navButtons}
         </View>
     );
 };

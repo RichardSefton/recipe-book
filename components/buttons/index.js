@@ -1,3 +1,7 @@
 import LargeButton from "./LargeButton";
+import { buttonImages } from "./buttonImages";
 
-export { LargeButton };
+export { 
+    LargeButton,
+    buttonImages
+};

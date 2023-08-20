@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { Animated, Text, View } from "react-native";
+import { Animated, Text, Image } from "react-native";
 import MenuButton from "./MenuButton";
 import { buttonStyle, buttonStylePressed } from "./styles";
+import { buttonImages } from './buttonImages';
 
-const LargeButton = ({ text, handlePressed }) => {    
+const LargeButton = ({ text = false, useImage=false, image=buttonImages.SAVE, handlePressed }) => {    
     const [pressed, setPressed] = useState(false);
 
     return (
@@ -12,7 +13,27 @@ const LargeButton = ({ text, handlePressed }) => {
             pressed={pressed}
             setPressed={setPressed}
         >
-            <Text style={pressed ? buttonStylePressed.buttonLargeText : buttonStyle.buttonLargeText} >{text}</Text>
+            {!!text && (
+                <Text
+                    style={
+                        pressed
+                            ? buttonStylePressed.buttonLargeText
+                            : buttonStyle.buttonLargeText
+                    }
+                >
+                    {text}
+                </Text>
+            )}
+            {!!useImage && (
+                <Image
+                    style={
+                        pressed
+                            ? buttonStylePressed.buttonLargeImage
+                            : buttonStyle.buttonLargeImage
+                    }
+                    source={image.uri}
+                />
+            )}
         </MenuButton>
     );
 };

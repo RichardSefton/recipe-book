@@ -31,6 +31,12 @@ export const buttonStyle = StyleSheet.create({
         fontSize: 100,
         bottom: 20,
     },
+    buttonLargeImage: {
+        width: 60,
+        height: 60,
+        tintColor: "#7542f5",
+        // bottom: 20,
+    },
 });
 
 export const buttonStylePressed = StyleSheet.create({
@@ -43,5 +49,9 @@ export const buttonStylePressed = StyleSheet.create({
     buttonLargeText: {
         ...buttonStyle.buttonLargeText,
         color: "#fff",
+    },
+    buttonLargeImage: {
+        ...buttonStyle.buttonLargeImage,
+        tintColor: "#fff",
     },
 });

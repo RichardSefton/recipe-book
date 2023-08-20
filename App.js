@@ -1,10 +1,11 @@
-import React, { useMemo, useEffect, useState } from 'react';
+import React, { useMemo, useEffect, useState , useRef} from 'react';
 import { SafeAreaView, Text, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { RecipeList, Recipe, NewRecipe } from "./views";
 import { DatabaseContext, openDb, createTables } from './datastore';
 import { AppStyle } from './styles';
+import { Menu } from "./components/menubar";
 
 export default function App() {
     const [dbConn, setDbConn] = useState({});
@@ -12,6 +13,7 @@ export default function App() {
     const [loadingStatus, setLoadingStatus] = useState(0);
 
     const Stack = createNativeStackNavigator();
+    const navigationRef = useRef(null);
 
     //memoize the options so that they don't get recreated
     //every time the component re-renders
@@ -50,12 +52,13 @@ export default function App() {
 
     return (
         <DatabaseContext.Provider value={{ conn: dbConn, setConn: setDbConn }}>
-            <NavigationContainer>
-                <Stack.Navigator 
-                    initialRouteName="RecipeList" 
-                >
+            <NavigationContainer ref={navigationRef}>
+                <Stack.Navigator initialRouteName="RecipeList">
                     <Stack.Group screenOptions={viewOptions}>
-                        <Stack.Screen name="RecipeList" component={RecipeList} />
+                        <Stack.Screen
+                            name="RecipeList"
+                            component={RecipeList}
+                        />
                     </Stack.Group>
                     {/* 
                         I think modal only works in ios.
@@ -75,6 +78,7 @@ export default function App() {
                         <Stack.Screen name="NewRecipe" component={NewRecipe} />
                     </Stack.Group>
                 </Stack.Navigator>
+                <Menu navigationRef={navigationRef} />
             </NavigationContainer>
         </DatabaseContext.Provider>
     );
