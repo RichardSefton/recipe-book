@@ -1,18 +1,25 @@
 import { openDb } from './dbConnection';
+import uuid from "react-native-uuid";
+import { tables } from './tables';
 
-export const createRecipe = async (db, recipe) => {
-    try {
-        const query = `INSERT INTO ${tableName}(id, name, description) values(?, ?, ?)`;
-        await db.executeSql(query, [uuidv4(), recipe.name, recipe.description]);
-    } catch (error) {
-        console.error(error);
-        throw Error("Failed to create todoItem !!!");
-    }
-};
+export const createRecipe = (db, recipe) => new Promise((resolve, reject) => {
+    const query = `INSERT INTO ${tables.RECIPES} (id, name, description) values(?, ?, ?)`;
+    db.transaction(tx => {
+        const newRecipe = { id: uuid.v4(), name: recipe.name, description: recipe.description };
+        tx.executeSql(
+            query, 
+            [newRecipe.id, newRecipe.name, newRecipe.description], 
+            () => {
+                return resolve(newRecipe);
+            },
+            (error) => reject(error)
+        ),
+        (error) => reject(error)
+    });
+});
 
-export const getRecipes = async () => new Promise((resolve, reject) => {
-    const conn = openDb()
-    conn.transaction(
+export const getRecipes = async (db) => new Promise((resolve, reject) => {
+    db.transaction(
         tx => {
             tx.executeSql('SELECT * FROM recipes', [], 
                 (tx, results) => {

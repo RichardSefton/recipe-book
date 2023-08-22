@@ -1,13 +1,7 @@
 // https://docs.expo.dev/versions/latest/sdk/sqlite/
 import * as SQLite from 'expo-sqlite';
 import { tables } from './tables';
-import { createContext } from 'react';
 import uuid from 'react-native-uuid';
-
-export const DatabaseContext = createContext({
-    conn: {},
-    setConn: () => {}
-});
 
 export const openDb = () => {
     try {
@@ -63,15 +57,15 @@ const primeDb = (conn) => new Promise((resolve, reject) => {
     conn.transaction(
         tx => {
             //clear down the database for consistent data
-            // tx.executeSql(`DELETE FROM ${tables.STEPS}`, []);
-            // tx.executeSql(`DELETE FROM ${tables.INGREDIENTS}`, []);
-            // tx.executeSql(`DELETE FROM ${tables.RECIPES}`, []);
-            // console.log("CLEARED DATA");
-            // console.log("PRIMING DATA");
-            // tx.executeSql(
-            //     `INSERT INTO ${tables.RECIPES} (id, name, description) values(?, ?, ?)`,
-            //     [uuid.v4(), "test", "test description"]
-            // );
+            tx.executeSql(`DELETE FROM ${tables.STEPS}`, []);
+            tx.executeSql(`DELETE FROM ${tables.INGREDIENTS}`, []);
+            tx.executeSql(`DELETE FROM ${tables.RECIPES}`, []);
+            console.log("CLEARED DATA");
+            console.log("PRIMING DATA");
+            tx.executeSql(
+                `INSERT INTO ${tables.RECIPES} (id, name, description) values(?, ?, ?)`,
+                [uuid.v4(), "test", "test description"]
+            );
             resolve()
         },
         error => reject(error)

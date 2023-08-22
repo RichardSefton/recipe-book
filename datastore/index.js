@@ -1,9 +1,9 @@
-import { DatabaseContext, openDb, createTables } from './dbConnection';
-import { getRecipes } from "./recipe";
+import { openDb, createTables } from './dbConnection';
+import { getRecipes, createRecipe } from "./recipe";
 
 export {
-    DatabaseContext,
     openDb,
     createTables,
     getRecipes,
+    createRecipe
 }

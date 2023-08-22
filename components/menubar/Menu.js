@@ -1,17 +1,17 @@
 import { useContext, useState, useMemo, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { createRecipe } from "../../redux/recipeSlice/slice";
 import { View } from "react-native";
 import { menuStyle } from './styles'
-import { DatabaseContext } from '../../datastore';
-import { useNavigation, useRoute } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import { LargeButton, buttonImages } from "../buttons";
 
 const Menu = ({ children, navigationRef }) => {
     //return true if in development mode
-    const { conn, setConn } = useContext(DatabaseContext);
     const [route, setRoute] = useState('');
 
     const navigation = useNavigation();
-    // const route = useRoute();
+    const dispatch = useDispatch();
 
     useEffect(() => {
         setRoute(navigationRef.current.getCurrentRoute().name);
@@ -26,6 +26,7 @@ const Menu = ({ children, navigationRef }) => {
 
     const handleSaveRecipe = () => {
         console.log("save recipe");
+        dispatch(createRecipe());
     };
 
     const navButtons = useMemo(() => {
