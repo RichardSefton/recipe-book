@@ -1,6 +1,10 @@
 export const setDatabaseConnection = (state, action) => {
     state.database = action.payload;
-}
+};
+
+export const setNavigation = (state, action) => {
+    state.navigation = action.payload;
+};
 
 export const setLoading = (state, action) => {
     state.loading = action.payload;

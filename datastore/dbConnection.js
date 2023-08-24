@@ -8,7 +8,7 @@ export const openDb = () => {
         const conn = SQLite.openDatabase('recipebook.db', '1.3');
         return conn;   
     } catch(error) {
-        console.log(error);
+        console.error(error);
     }
 }
 

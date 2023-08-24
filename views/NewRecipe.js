@@ -1,17 +1,17 @@
-import { useState } from 'react';
 import { SafeAreaView } from "react-native";
 import { styles } from "./styles";
-import { NewRecipeForm } from '../components/newrecipe';
+import { NewRecipeForm, IngredientsCard, StepsCard } from '../components/newrecipe';
 
-const NewRecipe = ({ navigator }) => {
-    const [recipeName, setRecipeName] = useState('');
-    const [recipeDescription, setRecipeDescription] = useState('');
-
+const NewRecipe = ({ }) => {
 
     return (
-        <SafeAreaView style={styles.modalContainer}>
-            <NewRecipeForm />
-        </SafeAreaView>
+        <>
+            <SafeAreaView style={styles.modalContainer}>
+                <IngredientsCard />
+                <NewRecipeForm />
+                <StepsCard />
+            </SafeAreaView>
+        </>
     );
 };
 

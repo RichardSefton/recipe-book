@@ -1,18 +1,17 @@
-import { useContext, useState, useMemo, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { createRecipe } from "../../redux/recipeSlice/slice";
+import { useState, useMemo, useEffect } from "react";
+import { useDispatch, connect } from "react-redux";
+import { createRecipe, toggleShowIngredients, toggleShowSteps } from "../../redux/recipeSlice/slice";
 import { View } from "react-native";
 import { menuStyle } from './styles'
 import { useNavigation } from "@react-navigation/native";
-import { LargeButton, buttonImages } from "../buttons";
+import { LargeButton, SmallButton, buttonImages } from "../buttons";
 
-const Menu = ({ children, navigationRef }) => {
+const Menu = ({ navigationRef, showIngredients }) => {
     //return true if in development mode
     const [route, setRoute] = useState('');
 
     const navigation = useNavigation();
     const dispatch = useDispatch();
-
     useEffect(() => {
         setRoute(navigationRef.current.getCurrentRoute().name);
         navigationRef.current.addListener('state', (e) => {
@@ -24,8 +23,14 @@ const Menu = ({ children, navigationRef }) => {
         navigation.navigate("NewRecipe");
     };
 
+    const openNewIngredientsCard = () => {
+        dispatch(toggleShowIngredients());
+    };
+    const openNewStepsCard = () => {
+        dispatch(toggleShowSteps());
+    }
+
     const handleSaveRecipe = () => {
-        console.log("save recipe");
         dispatch(createRecipe());
     };
 
@@ -33,7 +38,21 @@ const Menu = ({ children, navigationRef }) => {
         switch(route) {
             case 'NewRecipe': return (
                 <>
-                    <LargeButton imageUri={buttonImages.SAVE} useImage={true} handlePressed={handleSaveRecipe} />
+                    <SmallButton
+                        image={buttonImages.INGREDIENTS}
+                        useImage={true}
+                        handlePressed={openNewIngredientsCard}
+                    />
+                    <LargeButton
+                        image={buttonImages.SAVE}
+                        useImage={true}
+                        handlePressed={handleSaveRecipe}
+                    />
+                    <SmallButton
+                        image={buttonImages.STEPS}
+                        useImage={true}
+                        handlePressed={openNewStepsCard}
+                    />
                 </>
             );
             default: return (
@@ -51,4 +70,6 @@ const Menu = ({ children, navigationRef }) => {
     );
 };
 
-export default Menu;
+export default connect(({ recipeSlice }) => ({
+    showIngredients: recipeSlice.showIngredients,
+}))(Menu);

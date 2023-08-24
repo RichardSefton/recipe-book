@@ -3,12 +3,12 @@
 //Working off example here: https://github.com/hybridheroes/redux-toolkit-example/blob/master
 import { configureStore } from '@reduxjs/toolkit';
 import recipeReducer from './recipeSlice/slice';
-import databaseReducer from './databaseSlice/slice';
+import databaseReducer from './appSlice/slice';
 
 export const store = configureStore({
     reducer: {
         recipeSlice: recipeReducer,
-        databaseSlice: databaseReducer
+        appSlice: databaseReducer
     },
     //disable the serializable check as we want to store the database connection in state
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false })

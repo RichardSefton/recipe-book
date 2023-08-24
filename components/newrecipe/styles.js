@@ -4,8 +4,7 @@ export const styles = StyleSheet.create({
     newRecipeFormContainer: {
         width: "100%",
         alignItems: "center",
-        // justifyContent: "center"
-    },  
+    },
     textInput: {
         width: "90%",
         height: 50,
@@ -25,5 +24,42 @@ export const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: "normal",
         borderRadius: 5,
-    }
+    },
+    ingredientsContainer: {
+        position: "absolute",
+        bottom: 0,
+        width: "98%",
+        height: "99%",
+        backgroundColor: "#fff",
+        zIndex: 1,
+        borderTopRightRadius: 20,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 10,
+            height: 10,
+        },
+        shadowRadius: 3.84,
+        elevation: 5,
+        opacity: 0.99,
+        shadowOpacity: 0.1,
+    },
+    stepsContainer: {
+        position: "absolute",
+        bottom: 0,
+        right: 0,
+        width: "98%",
+        height: "99%",
+        backgroundColor: "#fff",
+        zIndex: 1,
+        borderTopLeftRadius: 20,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 10,
+            height: 10,
+        },
+        shadowRadius: 3.84,
+        elevation: 5,
+        opacity: 0.99,
+        shadowOpacity: 0.1,
+    },
 });

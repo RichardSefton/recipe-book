@@ -3,21 +3,30 @@ import {
     setDatabaseConnection as setDatabaseConnectionAction,
     setLoading as setLoadingAction,
     setProgress as setProgressAction,
+    setNavigation as setNavigationAction,
 } from "./actions";
 
-const databaseSlice = createSlice({
+const appSlice = createSlice({
     name: "recipe",
     initialState: {
         database: {},
         loading: true,
         progress: 0,
+        navigation: {},
     },
     reducers: {
         setDatabaseConnection: setDatabaseConnectionAction,
         setLoading: setLoadingAction,
         setProgress: setProgressAction,
+        setNavigation: setNavigationAction,
     },
 });
 
-export const { setDatabaseConnection, setLoading, setProgress } = databaseSlice.actions;
-export default databaseSlice.reducer;
+export const { 
+    setDatabaseConnection, 
+    setLoading, 
+    setProgress, 
+    setNavigation 
+} = appSlice.actions;
+
+export default appSlice.reducer;

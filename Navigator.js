@@ -5,7 +5,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { RecipeList, Recipe, NewRecipe } from "./views";
 import { AppStyle } from "./styles";
 import { Menu } from "./components/menubar";
-import { setDatabaseConnection, setLoading, setProgress } from "./redux/databaseSlice/slice";
+import { setDatabaseConnection, setLoading, setProgress } from "./redux/appSlice/slice";
 import { useDispatch, connect } from 'react-redux';
 import { openDb, createTables } from './datastore';
 
@@ -98,7 +98,7 @@ const Navigator = ({ loading, progress }) => {
     );
 };
 
-export default connect(({ databaseSlice }) => ({
-    loading: databaseSlice.loading,
-    progress: databaseSlice.progress,
+export default connect(({ appSlice }) => ({
+    loading: appSlice.loading,
+    progress: appSlice.progress,
 }))(Navigator);

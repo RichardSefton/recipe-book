@@ -7,7 +7,6 @@ export const recipesAdapter = createEntityAdapter({
 });
 
 export const setRecipeName = (state, action) => {
-    console.log(state, action);
     state.recipe.name = action.payload;
 };
 
@@ -15,17 +14,25 @@ export const setRecipeDescription = (state, action) => {
     state.recipe.description = action.payload;
 };
 
+export const toggleShowIngredients = (state) => {
+    state.showIngredients = !state.showIngredients;
+};
+
+export const toggleShowSteps = (state) => {
+    state.showSteps = !state.showSteps;
+};
+
 export const loadRecipes = createAsyncThunk('recipe/loadRecipes', async (_, { getState }) => {
-    const { databaseSlice: { database } } = getState();
+    const { appSlice: { database } } = getState();
     return await getRecipes(database);
 });
 
 export const createRecipe = createAsyncThunk('recipe/createRecipe', async (_, { getState }) => {
-    const { databaseSlice: { database }, recipeSlice: { recipe }} = getState();
+    const { appSlice: { database }, recipeSlice: { recipe }} = getState();
     try {
         const newRecipe = await createRecipeRecord(database, recipe);
         return newRecipe;
     } catch(error) {
-        console.log(error);
+        console.error(error);
     }
 });

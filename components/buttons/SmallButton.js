@@ -1,24 +1,29 @@
-import { useState } from 'react';
+import { useState } from "react";
 import { Text, Image } from "react-native";
 import MenuButton from "./MenuButton";
 import { buttonStyle, buttonStylePressed } from "./styles";
-import { buttonImages } from './buttonImages';
+import { buttonImages } from "./buttonImages";
 
-const LargeButton = ({ text = false, useImage=false, image=buttonImages.SAVE, handlePressed }) => {    
+const SmallButton = ({
+    text = false,
+    useImage = false,
+    image = buttonImages.SAVE,
+    handlePressed,
+}) => {
     const [pressed, setPressed] = useState(false);
-
     return (
         <MenuButton
             pressAction={handlePressed}
             pressed={pressed}
             setPressed={setPressed}
+            small={true}
         >
             {!!text && (
                 <Text
                     style={
                         pressed
-                            ? buttonStylePressed.buttonLargeText
-                            : buttonStyle.buttonLargeText
+                            ? buttonStylePressed.buttonSmallText
+                            : buttonStyle.buttonSmallText
                     }
                 >
                     {text}
@@ -28,8 +33,8 @@ const LargeButton = ({ text = false, useImage=false, image=buttonImages.SAVE, ha
                 <Image
                     style={
                         pressed
-                            ? buttonStylePressed.buttonLargeImage
-                            : buttonStyle.buttonLargeImage
+                            ? buttonStylePressed.buttonSmallImage
+                            : buttonStyle.buttonSmallImage
                     }
                     source={image.uri}
                 />
@@ -38,4 +43,4 @@ const LargeButton = ({ text = false, useImage=false, image=buttonImages.SAVE, ha
     );
 };
 
-export default LargeButton;
+export default SmallButton;

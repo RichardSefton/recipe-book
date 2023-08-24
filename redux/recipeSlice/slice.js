@@ -4,7 +4,9 @@ import {
     loadRecipes, 
     createRecipe,
     setRecipeName as setRecipeNameAction,
-    setRecipeDescription as setRecipeDescriptionAction
+    setRecipeDescription as setRecipeDescriptionAction,
+    toggleShowIngredients as toggleShowIngredientsAction,
+    toggleShowSteps as toggleShowStepsAction,
 } from './actions';
 
 //dab hand at react redux. But the old way with actions and reducers
@@ -22,6 +24,8 @@ const recipeSlice = createSlice({
             ingredients: [],
             steps: []
         },
+        showIngredients: false,
+        showSteps: false,
         recipes: recipesAdapter.getInitialState({
             loading: false,
         })
@@ -30,6 +34,8 @@ const recipeSlice = createSlice({
         //reducers go here...
         setRecipeName: setRecipeNameAction,
         setRecipeDescription: setRecipeDescriptionAction,
+        toggleShowIngredients: toggleShowIngredientsAction,
+        toggleShowSteps: toggleShowStepsAction,
     },
     extraReducers: (builder) => {
         builder.addCase(loadRecipes.pending, (state) => {
@@ -48,6 +54,10 @@ const recipeSlice = createSlice({
         builder.addCase(createRecipe.fulfilled, (state, action) => {
             state.loading = false;
             recipesAdapter.addOne(state.recipes, action.payload);
+            //recipe creation succeeded so we can navigate away. 
+            //luckily, we have the navigation object in state. 
+            const { appSlice: { navigation } } = state;
+            navigation.navigate('RecipeList');
         });
         builder.addCase(createRecipe.rejected, (state) => {
             state.loading = false;
@@ -59,6 +69,8 @@ export { createRecipe, loadRecipes };
 
 export const { 
     setRecipeName, 
-    setRecipeDescription
+    setRecipeDescription,
+    toggleShowIngredients,
+    toggleShowSteps,
 } = recipeSlice.actions;
 export default recipeSlice.reducer;

@@ -24,6 +24,20 @@ export const buttonStyle = StyleSheet.create({
         bottom: 40,
         alignItems: "center",
         justifyContent: "center",
+        // flex: 1,
+    },
+    buttonSmall: {
+        borderWidth: 1,
+        borderRadius: 35,
+        borderColor: "#7542f5",
+        backgroundColor: "#fff",
+        width: 70,
+        height: 70,
+        borderRadius: 35,
+        bottom: 40,
+        alignItems: "center",
+        justifyContent: "center",
+        // flex: 1,
     },
     buttonLargeText: {
         color: "#7542f5",
@@ -37,6 +51,18 @@ export const buttonStyle = StyleSheet.create({
         tintColor: "#7542f5",
         // bottom: 20,
     },
+    buttonSmallText: {
+        color: "#7542f5",
+        fontWeight: "200",
+        fontSize: 100,
+        bottom: 20,
+    },
+    buttonSmallImage: {
+        width: 60,
+        height: 60,
+        tintColor: "#7542f5",
+        // bottom: 20,
+    },
 });
 
 export const buttonStylePressed = StyleSheet.create({
@@ -44,7 +70,13 @@ export const buttonStylePressed = StyleSheet.create({
         ...buttonStyle.buttonLarge,
         backgroundColor: "#7542f5",
         borderColor: "#fff",
-        transform: [{ translateY: 2 }]
+        transform: [{ translateY: 2 }],
+    },
+    buttonSmall: {
+        ...buttonStyle.buttonSmall,
+        backgroundColor: "#7542f5",
+        borderColor: "#fff",
+        transform: [{ translateY: 2 }],
     },
     buttonLargeText: {
         ...buttonStyle.buttonLargeText,
@@ -52,6 +84,14 @@ export const buttonStylePressed = StyleSheet.create({
     },
     buttonLargeImage: {
         ...buttonStyle.buttonLargeImage,
+        tintColor: "#fff",
+    },
+    buttonSmallText: {
+        ...buttonStyle.buttonSmallText,
+        color: "#fff",
+    },
+    buttonSmallImage: {
+        ...buttonStyle.buttonSmallImage,
         tintColor: "#fff",
     },
 });

@@ -2,12 +2,14 @@ import { useState } from 'react';
 import { Animated, View, Pressable } from "react-native";
 import { buttonStyle, buttonStylePressed } from "./styles";
 
-const MenuButton = ({ children, style, pressAction, pressed, setPressed }) => {
+const MenuButton = ({ children, style, pressAction, pressed, setPressed, small=false }) => {
 
     return (
         <Animated.View style={style}>
             <Pressable 
-                style={pressed ? buttonStylePressed.buttonLarge : buttonStyle.buttonLarge} 
+                style={pressed ? 
+                    small? buttonStylePressed.buttonSmall : buttonStylePressed.buttonLarge : 
+                    small ? buttonStyle.buttonSmall : buttonStyle.buttonLarge} 
                 onPressIn={() => setPressed(true)} 
                 onPress={pressAction}
                 onPressOut={() => setPressed(false)}

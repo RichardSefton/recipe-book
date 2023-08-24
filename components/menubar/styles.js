@@ -9,6 +9,8 @@ export const menuStyle = StyleSheet.create({
         backgroundColor: "#7542f5",
         alignItems: "center",
         justifyContent: "center",
+        flexDirection: "row",
+        justifyContent: "space-around",
     },
 });
 
