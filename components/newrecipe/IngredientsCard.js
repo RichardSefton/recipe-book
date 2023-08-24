@@ -1,7 +1,9 @@
 import { useEffect, useRef } from 'react';
 import { Animated } from 'react-native';
 import { connect } from 'react-redux';
-import { styles } from './styles';
+import { ingredientsFormStyles as styles } from './styles';
+import NewIngredientsForm from './NewIngredientsForm';
+import Ingredients from './Ingredients';
 
 const IngredientsCard = ({ showIngredients }) => {
     const slideAnim = useRef(new Animated.Value(0)).current;
@@ -33,7 +35,8 @@ const IngredientsCard = ({ showIngredients }) => {
                 }
             ]}
         >
-
+            <NewIngredientsForm />
+            <Ingredients />
         </Animated.View>
     );
 }

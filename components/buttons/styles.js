@@ -63,6 +63,15 @@ export const buttonStyle = StyleSheet.create({
         tintColor: "#7542f5",
         // bottom: 20,
     },
+    buttonRectangle: {
+        width: "90%",
+        height: 50,
+        fontSize: 20,
+        fontWeight: "bold",
+        backgroundColor: "#7542f5",
+        textAlign: "center",
+        justifyContent: "center",
+    },
 });
 
 export const buttonStylePressed = StyleSheet.create({
@@ -93,5 +102,9 @@ export const buttonStylePressed = StyleSheet.create({
     buttonSmallImage: {
         ...buttonStyle.buttonSmallImage,
         tintColor: "#fff",
+    },
+    buttonRectangle: {
+        ...buttonStyle.buttonRectangle,
+        backgroundColor: "#5530b8",
     },
 });

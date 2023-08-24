@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { Animated } from "react-native";
 import { connect } from "react-redux";
-import { styles } from "./styles";
+import { stepsFormStyles as styles } from "./styles";
 
 const StepsCard = ({ showSteps }) => {
     const slideAnim = useRef(new Animated.Value(0)).current;

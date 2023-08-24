@@ -5,6 +5,7 @@ import {
     createRecipe,
     setRecipeName as setRecipeNameAction,
     setRecipeDescription as setRecipeDescriptionAction,
+    addIngredient as addIngredientAction,
     toggleShowIngredients as toggleShowIngredientsAction,
     toggleShowSteps as toggleShowStepsAction,
 } from './actions';
@@ -34,6 +35,7 @@ const recipeSlice = createSlice({
         //reducers go here...
         setRecipeName: setRecipeNameAction,
         setRecipeDescription: setRecipeDescriptionAction,
+        addIngredient: addIngredientAction,
         toggleShowIngredients: toggleShowIngredientsAction,
         toggleShowSteps: toggleShowStepsAction,
     },
@@ -70,6 +72,7 @@ export { createRecipe, loadRecipes };
 export const { 
     setRecipeName, 
     setRecipeDescription,
+    addIngredient,
     toggleShowIngredients,
     toggleShowSteps,
 } = recipeSlice.actions;

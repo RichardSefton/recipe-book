@@ -1,4 +1,3 @@
-import { openDb } from './dbConnection';
 import uuid from "react-native-uuid";
 import { tables } from './tables';
 

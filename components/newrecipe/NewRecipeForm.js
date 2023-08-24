@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { TextInput, View } from 'react-native';
-import { styles } from './styles';
+import { recipeFormStyles as styles } from "./styles";
 import { setRecipeName, setRecipeDescription } from '../../redux/recipeSlice/slice';
 
 const NewRecipeForm = ({ recipeName, recipeDescription }) => {

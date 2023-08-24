@@ -1,5 +1,6 @@
 import { createAsyncThunk, createEntityAdapter } from "@reduxjs/toolkit";
 import { getRecipes, createRecipe as createRecipeRecord } from "../../datastore";
+import uuid from "react-native-uuid";
 
 export const recipesAdapter = createEntityAdapter({
     selectId: (recipe) => recipe.id,
@@ -12,6 +13,10 @@ export const setRecipeName = (state, action) => {
 
 export const setRecipeDescription = (state, action) => {
     state.recipe.description = action.payload;
+};
+
+export const addIngredient = (state, action) => {
+    state.recipe.ingredients.push({ ...action.payload, id: uuid.v4() });
 };
 
 export const toggleShowIngredients = (state) => {
