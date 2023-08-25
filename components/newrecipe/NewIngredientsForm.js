@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { View, TextInput, Text } from 'react-native';
 import { ingredientsFormStyles as styles, recipeFormStyles as recipeStyles } from './styles';
 import SelectDropdown from 'react-native-select-dropdown';
@@ -14,11 +14,22 @@ const NewIngredientsForm = ({ }) => {
     const [uom, setUom] = useState('');
     const [quantity, setQuantity] = useState('');
 
+    useEffect(() => {
+        //cleanup to reset the form when we leave the page
+        return () => {
+            setIngredient('');
+            setQuantity('');
+            setUom('');
+            dropdownRef.current.reset();
+        }
+    }, []);
+
     const handleAddIngredient = () => {
-        dispatch(addIngredient({ ingredient, quantity, uom }))
-        setIngredient('');
-        setQuantity('');
-        setUom('');
+        if (!(!!ingredient) || !(!!quantity) || !(!!uom)) return;
+        dispatch(addIngredient({ ingredient, quantity, uom }));
+        setIngredient("");
+        setQuantity("");
+        setUom("");
         dropdownRef.current.reset();
     };
 

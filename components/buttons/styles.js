@@ -25,6 +25,15 @@ export const buttonStyle = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         // flex: 1,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 10,
+            height: 10,
+        },
+        shadowRadius: 3.84,
+        elevation: 15,
+        opacity: 0.99,
+        shadowOpacity: 0.1,
     },
     buttonSmall: {
         borderWidth: 1,
@@ -38,6 +47,15 @@ export const buttonStyle = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         // flex: 1,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 10,
+            height: 10,
+        },
+        shadowRadius: 3.84,
+        elevation: 15,
+        opacity: 0.99,
+        shadowOpacity: 0.1,
     },
     buttonLargeText: {
         color: "#7542f5",
@@ -71,6 +89,16 @@ export const buttonStyle = StyleSheet.create({
         backgroundColor: "#7542f5",
         textAlign: "center",
         justifyContent: "center",
+        zIndex: 99,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 5,
+            height: 5,
+        },
+        shadowRadius: 3.84,
+        elevation: 25,
+        opacity: 1,
+        shadowOpacity: 0.9,
     },
 });
 

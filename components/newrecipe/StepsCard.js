@@ -2,6 +2,8 @@ import { useEffect, useRef } from "react";
 import { Animated } from "react-native";
 import { connect } from "react-redux";
 import { stepsFormStyles as styles } from "./styles";
+import NewStepsForm from "./NewStepsForm";
+import Steps from "./Steps";
 
 const StepsCard = ({ showSteps }) => {
     const slideAnim = useRef(new Animated.Value(0)).current;
@@ -9,7 +11,6 @@ const StepsCard = ({ showSteps }) => {
     //Using an animation to slide the ingredients card in and out
     //from the bottom corner.
     useEffect(() => {
-        console.log({ showSteps });
         Animated.timing(slideAnim, {
             toValue: showSteps ? 0 : 1,
             duration: 500,
@@ -34,7 +35,10 @@ const StepsCard = ({ showSteps }) => {
                     transform: [{ translateY }, { translateX }],
                 },
             ]}
-        ></Animated.View>
+        >
+            <NewStepsForm />
+            <Steps />
+        </Animated.View>
     );
 };
 

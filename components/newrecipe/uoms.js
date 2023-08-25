@@ -1,4 +1,5 @@
 export const uoms = [
+    { uom: "EACH", label: "Each" },
     { uom: "TSPN", label: "Teaspoon" },
     { uom: "TBSPN", label: "Tablespoon" },
     { uom: "CUP", label: "Cup" },

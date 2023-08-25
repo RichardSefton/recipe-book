@@ -11,6 +11,15 @@ export const menuStyle = StyleSheet.create({
         justifyContent: "center",
         flexDirection: "row",
         justifyContent: "space-around",
+        shadowColor: "#000",
+        shadowOffset: {
+            width: -10,
+            height: -10,
+        },
+        shadowRadius: 3.84,
+        elevation: 25,
+        opacity: 0.99,
+        shadowOpacity: 1,
     },
 });
 

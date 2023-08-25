@@ -8,6 +8,7 @@ import {
     addIngredient as addIngredientAction,
     toggleShowIngredients as toggleShowIngredientsAction,
     toggleShowSteps as toggleShowStepsAction,
+    addStep as addStepAction,
 } from './actions';
 
 //dab hand at react redux. But the old way with actions and reducers
@@ -36,6 +37,7 @@ const recipeSlice = createSlice({
         setRecipeName: setRecipeNameAction,
         setRecipeDescription: setRecipeDescriptionAction,
         addIngredient: addIngredientAction,
+        addStep: addStepAction,
         toggleShowIngredients: toggleShowIngredientsAction,
         toggleShowSteps: toggleShowStepsAction,
     },
@@ -62,6 +64,7 @@ const recipeSlice = createSlice({
             navigation.navigate('RecipeList');
         });
         builder.addCase(createRecipe.rejected, (state) => {
+            //we can handle error notifications here.
             state.loading = false;
         });
     }
@@ -73,6 +76,7 @@ export const {
     setRecipeName, 
     setRecipeDescription,
     addIngredient,
+    addStep,
     toggleShowIngredients,
     toggleShowSteps,
 } = recipeSlice.actions;
