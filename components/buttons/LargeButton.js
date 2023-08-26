@@ -6,7 +6,6 @@ import { buttonImages } from './buttonImages';
 
 const LargeButton = ({ text = false, useImage=false, image=buttonImages.SAVE, handlePressed, disabled=false }) => {    
     const [pressed, setPressed] = useState(false);
-    console.log('largebutton', { disabled });
     return (
         <MenuButton
             pressAction={handlePressed}

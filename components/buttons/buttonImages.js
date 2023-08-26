@@ -11,4 +11,12 @@ export const buttonImages = {
         name: 'STEPS',
         uri: require('../../assets/123.png')
     },
+    EDIT: {
+        name: 'EDIT',
+        uri: require('../../assets/edit.png')
+    },
+    DELETE: {
+        name: 'DELETE',
+        uri: require('../../assets/trash.png')
+    },
 }

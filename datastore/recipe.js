@@ -21,7 +21,7 @@ export const createRecipe = (db, recipe) => new Promise((resolve, reject) => {
             recipe.ingredients.forEach(ingredient => {
                 tx.executeSql(
                     ingredientsQuery,
-                    [uuid.v4(), newRecipe.id, ingredient.ingredient, ingredient.quantity, ingredient.uom],
+                    [ingredient.id, newRecipe.id, ingredient.ingredient, ingredient.quantity, ingredient.uom],
                     () => { },
                     (error) => reject(error)
                 )
@@ -29,7 +29,7 @@ export const createRecipe = (db, recipe) => new Promise((resolve, reject) => {
             recipe.steps.forEach(step => {
                 tx.executeSql(
                     stepsQuery,
-                    [uuid.v4(), newRecipe.id, step.step, step.stepOrder],
+                    [step.id, newRecipe.id, step.step, step.stepOrder],
                     () => { },
                     (error) => reject(error)
                 )

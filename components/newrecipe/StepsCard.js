@@ -4,8 +4,9 @@ import { connect } from "react-redux";
 import { stepsFormStyles as styles } from "./styles";
 import NewStepsForm from "./NewStepsForm";
 import Steps from "./Steps";
+import EditStepsForm from './EditStepsForm';
 
-const StepsCard = ({ showSteps }) => {
+const StepsCard = ({ showSteps, editStep }) => {
     const slideAnim = useRef(new Animated.Value(0)).current;
 
     //Using an animation to slide the ingredients card in and out
@@ -36,7 +37,13 @@ const StepsCard = ({ showSteps }) => {
                 },
             ]}
         >
-            <NewStepsForm />
+            { 
+                editStep ? (
+                    <EditStepsForm />
+                ) : (
+                    <NewStepsForm />
+                )
+            }
             <Steps />
         </Animated.View>
     );
@@ -44,4 +51,5 @@ const StepsCard = ({ showSteps }) => {
 
 export default connect(({ recipeSlice }) => ({
     showSteps: recipeSlice.showSteps,
+    editStep: recipeSlice.active.editStep,
 }))(StepsCard);

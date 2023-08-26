@@ -25,7 +25,6 @@ export const addStep = (state, action) => {
 };
 
 export const clearIngredients = (state, action) => {
-    console.log(state, action)
     state.recipe.ingredients = [];
 };
 
@@ -40,6 +39,41 @@ export const toggleShowIngredients = (state) => {
 export const toggleShowSteps = (state) => {
     state.showSteps = !state.showSteps;
 };
+
+export const selectStepForEdit = (state, action) => {
+    state.active.step = action.payload;
+    state.active.editStep = true;
+};
+export const cancelEditStep = (state) => {
+    state.active.step = {
+        id: '',
+        stepNo: '',
+        step: '',
+    };
+    state.active.editStep = false;
+};
+export const saveEditStep = (state, action) => {
+    const index = state.recipe.steps.findIndex((s) => s.id === action.payload.id);
+    if (index === -1) return;
+    state.recipe.steps[index] = action.payload;
+    state.active.step = {
+        id: '',
+        stepNo: '',
+        step: '',
+    };
+    state.active.editStep = false;
+};
+export const deleteStep = (state, action) => {
+    console.log(action.payload);
+    state.recipe.steps = [...state.recipe.steps.filter(s => s.id !== action.payload.id)];
+    console.log(state.recipe.steps);
+    //its not enough to just remove the step from the recipe, we also need to update the stepNo's for each step after the deleted step
+    const sortedSteps = state.recipe.steps.sort((a, b) => a.stepNo - b.stepNo);
+    sortedSteps.forEach((s, i) => {
+        s.stepNo = i + 1;
+    });
+    state.recipe.steps = sortedSteps;
+}
 
 export const loadRecipes = createAsyncThunk('recipe/loadRecipes', async (_, { getState, rejectWithValue }) => {
     const { appSlice: { database } } = getState();

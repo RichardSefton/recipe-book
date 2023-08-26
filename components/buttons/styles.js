@@ -148,3 +148,32 @@ export const buttonStylePressed = StyleSheet.create({
         backgroundColor: "#5530b8",
     },
 });
+
+export const editIconStyles = StyleSheet.create({
+    container: {
+        width: 25,
+        height: 25,
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    image: {
+        width: 25,
+        height: 25,
+        tintColor: "#7542f5",
+    },
+});
+
+export const deleteIconStyles = StyleSheet.create({
+    container: {
+        width: 25,
+        height: 25,
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    image: {
+        width: 25,
+        height: 25,
+        tintColor: "#7542f5",
+    },
+});
+

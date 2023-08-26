@@ -11,6 +11,10 @@ import {
     addStep as addStepAction,
     clearIngredients as clearIngredientsAction,
     clearSteps as clearStepsAction,
+    selectStepForEdit as selectStepForEditAction,
+    cancelEditStep as cancelEditStepAction,
+    saveEditStep as saveEditStepAction,
+    deleteStep as deleteStepAction,
 } from './actions';
 
 //dab hand at react redux. But the old way with actions and reducers
@@ -26,7 +30,29 @@ const recipeSlice = createSlice({
             name: '',
             description: '',
             ingredients: [],
-            steps: []
+            steps: [],
+        },
+        active: {
+            recipe: {
+                id: '',
+                name: '',
+                description: '',
+                ingredients: [],
+                steps: [],
+            },
+            step: {
+                id: '',
+                stepNo: '',
+                step: '',
+            },
+            ingredient: {
+                id: '',
+                ingredient: '',
+                quantity: '',
+                unit: '',
+            },
+            editStep: false,
+            editIngredient: false,
         },
         showIngredients: false,
         showSteps: false,
@@ -44,6 +70,10 @@ const recipeSlice = createSlice({
         toggleShowSteps: toggleShowStepsAction,
         clearIngredients: clearIngredientsAction,
         clearSteps: clearStepsAction,
+        selectStepForEdit: selectStepForEditAction,
+        cancelEditStep: cancelEditStepAction,
+        saveEditStep: saveEditStepAction,
+        deleteStep: deleteStepAction,
     },
     extraReducers: (builder) => {
         builder.addCase(loadRecipes.pending, (state) => {
@@ -61,7 +91,6 @@ const recipeSlice = createSlice({
         });
         builder.addCase(createRecipe.fulfilled, (state, action) => {
             state.loading = false;
-            console.log('action payload', action.payload);
             recipesAdapter.addOne(state.recipes, action.payload);
         });
         builder.addCase(createRecipe.rejected, (state, action) => {
@@ -83,5 +112,9 @@ export const {
     toggleShowSteps,
     clearIngredients,
     clearSteps,
+    selectStepForEdit,
+    cancelEditStep,
+    saveEditStep,
+    deleteStep,
 } = recipeSlice.actions;
 export default recipeSlice.reducer;
