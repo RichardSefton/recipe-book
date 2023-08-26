@@ -64,10 +64,8 @@ export const saveEditStep = (state, action) => {
     state.active.editStep = false;
 };
 export const deleteStep = (state, action) => {
-    console.log(action.payload);
-    state.recipe.steps = [...state.recipe.steps.filter(s => s.id !== action.payload.id)];
-    console.log(state.recipe.steps);
     //its not enough to just remove the step from the recipe, we also need to update the stepNo's for each step after the deleted step
+    state.recipe.steps = [...state.recipe.steps.filter(s => s.id !== action.payload.id)];
     const sortedSteps = state.recipe.steps.sort((a, b) => a.stepNo - b.stepNo);
     sortedSteps.forEach((s, i) => {
         s.stepNo = i + 1;
