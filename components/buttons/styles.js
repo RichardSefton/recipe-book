@@ -100,6 +100,18 @@ export const buttonStyle = StyleSheet.create({
         opacity: 1,
         shadowOpacity: 0.9,
     },
+    disabled: {
+        borderColor: "#ccc",
+        tintColor: "#ccc",
+        color: "#ccc",
+        opacity: 0.9,
+    },
+    textDisabled: {
+        color: "#ccc",
+    },
+    imageDisabled: {
+        tintColor: "#ccc",
+    },
 });
 
 export const buttonStylePressed = StyleSheet.create({

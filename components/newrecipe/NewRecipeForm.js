@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { TextInput, View } from 'react-native';
 import { recipeFormStyles as styles } from "./styles";
-import { setRecipeName, setRecipeDescription } from '../../redux/recipeSlice/slice';
+import { setRecipeName, setRecipeDescription, clearIngredients, clearSteps } from '../../redux/recipeSlice/slice';
 
 const NewRecipeForm = ({ recipeName, recipeDescription }) => {
     const dispatch = useDispatch();
@@ -15,6 +15,8 @@ const NewRecipeForm = ({ recipeName, recipeDescription }) => {
         return () => {
             dispatch(setRecipeName(''));
             dispatch(setRecipeDescription(''));
+            dispatch(clearIngredients());
+            dispatch(clearSteps());
         }
     }, []);
 

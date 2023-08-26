@@ -22,7 +22,16 @@ export const addIngredient = (state, action) => {
 
 export const addStep = (state, action) => {
     state.recipe.steps.push({ ...action.payload, id: uuid.v4() });
-}
+};
+
+export const clearIngredients = (state, action) => {
+    console.log(state, action)
+    state.recipe.ingredients = [];
+};
+
+export const clearSteps = (state) => {
+    state.recipe.steps = [];
+};
 
 export const toggleShowIngredients = (state) => {
     state.showIngredients = !state.showIngredients;
@@ -32,12 +41,16 @@ export const toggleShowSteps = (state) => {
     state.showSteps = !state.showSteps;
 };
 
-export const loadRecipes = createAsyncThunk('recipe/loadRecipes', async (_, { getState }) => {
+export const loadRecipes = createAsyncThunk('recipe/loadRecipes', async (_, { getState, rejectWithValue }) => {
     const { appSlice: { database } } = getState();
-    return await getRecipes(database);
+    try {
+        return await getRecipes(database);
+    } catch(error) {
+        return rejectWithValue(error);
+    }
 });
 
-export const createRecipe = createAsyncThunk('recipe/createRecipe', async (_, { getState, rejectWithValue }) => {
+export const createRecipe = createAsyncThunk('recipe/createRecipe', async (_, { getState, rejectWithValue, dispatch }) => {
     const { appSlice: { database }, recipeSlice: { recipe }} = getState();
     try {
         const { validated, message } = validateNewRecipe(recipe);
@@ -45,6 +58,7 @@ export const createRecipe = createAsyncThunk('recipe/createRecipe', async (_, { 
         const newRecipe = await createRecipeRecord(database, recipe);
         return newRecipe;
     } catch(error) {
-        console.error(error);
+        console.error('create recipe error', error);
+        return rejectWithValue(error);
     }
 });

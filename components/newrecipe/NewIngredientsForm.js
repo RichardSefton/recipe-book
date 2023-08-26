@@ -20,7 +20,7 @@ const NewIngredientsForm = ({ }) => {
             setIngredient('');
             setQuantity('');
             setUom('');
-            dropdownRef.current.reset();
+            if (dropdownRef.current) dropdownRef.current.reset();
         }
     }, []);
 
@@ -30,7 +30,7 @@ const NewIngredientsForm = ({ }) => {
         setIngredient("");
         setQuantity("");
         setUom("");
-        dropdownRef.current.reset();
+        if (dropdownRef.current) dropdownRef.current.reset();
     };
 
     return (

@@ -2,19 +2,42 @@ import uuid from "react-native-uuid";
 import { tables } from './tables';
 
 export const createRecipe = (db, recipe) => new Promise((resolve, reject) => {
-    const query = `INSERT INTO ${tables.RECIPES} (id, name, description) values(?, ?, ?)`;
-    db.transaction(tx => {
-        const newRecipe = { id: uuid.v4(), name: recipe.name, description: recipe.description };
-        tx.executeSql(
-            query, 
-            [newRecipe.id, newRecipe.name, newRecipe.description], 
-            () => {
-                return resolve(newRecipe);
-            },
-            (error) => reject(error)
-        ),
+    const recipeQuery = `INSERT INTO ${tables.RECIPES} (id, name, description) values(?, ?, ?)`;
+    const ingredientsQuery = `INSERT INTO ${tables.INGREDIENTS} (id, recipeId, ingredient, quantity, uom) values(?, ?, ?, ?, ?)`;
+    const stepsQuery = `INSERT INTO ${tables.STEPS} (id, recipeId, step, stepOrder) values(?, ?, ?, ?)`;
+    db.transaction(
+        (tx) => {
+            const newRecipe = {
+                id: uuid.v4(),
+                name: recipe.name,
+                description: recipe.description,
+            };
+            tx.executeSql(
+                recipeQuery,
+                [newRecipe.id, newRecipe.name, newRecipe.description],
+                () => { },
+                (error) => reject(error)
+            )
+            recipe.ingredients.forEach(ingredient => {
+                tx.executeSql(
+                    ingredientsQuery,
+                    [uuid.v4(), newRecipe.id, ingredient.ingredient, ingredient.quantity, ingredient.uom],
+                    () => { },
+                    (error) => reject(error)
+                )
+            });
+            recipe.steps.forEach(step => {
+                tx.executeSql(
+                    stepsQuery,
+                    [uuid.v4(), newRecipe.id, step.step, step.stepOrder],
+                    () => { },
+                    (error) => reject(error)
+                )
+            });
+            resolve(newRecipe);
+        },
         (error) => reject(error)
-    });
+    );
 });
 
 export const getRecipes = async (db) => new Promise((resolve, reject) => {

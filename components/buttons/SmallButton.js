@@ -9,6 +9,7 @@ const SmallButton = ({
     useImage = false,
     image = buttonImages.SAVE,
     handlePressed,
+    disabled = false,
 }) => {
     const [pressed, setPressed] = useState(false);
     return (
@@ -17,6 +18,7 @@ const SmallButton = ({
             pressed={pressed}
             setPressed={setPressed}
             small={true}
+            disabled={disabled}
         >
             {!!text && (
                 <Text

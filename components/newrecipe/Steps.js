@@ -4,7 +4,6 @@ import { stepsFormStyles as styles } from "./styles";
 
 const Steps = ({ steps }) => (
     <ScrollView scrollEnabled={true} style={styles.stepsListContainer}>
-        {console.log(steps)}
         {steps.map((s) => (
             <View key={s.id} style={styles.stepLineContainer}>
                 <Text style={[styles.stepLineText, styles.stepNoLineText]}>

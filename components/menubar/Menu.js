@@ -6,7 +6,7 @@ import { menuStyle } from './styles'
 import { useNavigation } from "@react-navigation/native";
 import { LargeButton, SmallButton, buttonImages } from "../buttons";
 
-const Menu = ({ navigationRef, showIngredients }) => {
+const Menu = ({ navigationRef, recipe }) => {
     //return true if in development mode
     const [route, setRoute] = useState('');
 
@@ -18,6 +18,10 @@ const Menu = ({ navigationRef, showIngredients }) => {
             setRoute(e.data?.state?.routes?.[e.data?.state?.index]?.name)
         });
     }, []);
+
+    const recipeOkToSave = useMemo(() => {
+        return (!!recipe.name && !!recipe.description && !!(recipe.ingredients.length) && !!(recipe.steps.length));
+    }, [recipe]);
 
     const handleNewRecipe = () => {
         navigation.navigate("NewRecipe");
@@ -31,7 +35,9 @@ const Menu = ({ navigationRef, showIngredients }) => {
     }
 
     const handleSaveRecipe = () => {
-        dispatch(createRecipe());
+        dispatch(createRecipe())
+            .then(() => navigation.navigate("RecipeList"))
+            .catch((err) => console.error(err));
     };
 
     const navButtons = useMemo(() => {
@@ -47,6 +53,7 @@ const Menu = ({ navigationRef, showIngredients }) => {
                         image={buttonImages.SAVE}
                         useImage={true}
                         handlePressed={handleSaveRecipe}
+                        disabled={!recipeOkToSave}
                     />
                     <SmallButton
                         image={buttonImages.STEPS}
@@ -61,7 +68,7 @@ const Menu = ({ navigationRef, showIngredients }) => {
                 </>
             );
         }
-    }, [route]);
+    }, [route, recipeOkToSave]);
 
     return (
         <View style={menuStyle.bar}>
@@ -71,5 +78,5 @@ const Menu = ({ navigationRef, showIngredients }) => {
 };
 
 export default connect(({ recipeSlice }) => ({
-    showIngredients: recipeSlice.showIngredients,
+    recipe: recipeSlice.recipe,
 }))(Menu);

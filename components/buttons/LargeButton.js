@@ -4,33 +4,36 @@ import MenuButton from "./MenuButton";
 import { buttonStyle, buttonStylePressed } from "./styles";
 import { buttonImages } from './buttonImages';
 
-const LargeButton = ({ text = false, useImage=false, image=buttonImages.SAVE, handlePressed }) => {    
+const LargeButton = ({ text = false, useImage=false, image=buttonImages.SAVE, handlePressed, disabled=false }) => {    
     const [pressed, setPressed] = useState(false);
-
+    console.log('largebutton', { disabled });
     return (
         <MenuButton
             pressAction={handlePressed}
             pressed={pressed}
             setPressed={setPressed}
+            disabled={disabled}
         >
             {!!text && (
                 <Text
-                    style={
+                    style={[
                         pressed
                             ? buttonStylePressed.buttonLargeText
-                            : buttonStyle.buttonLargeText
-                    }
+                            : buttonStyle.buttonLargeText,
+                        disabled && buttonStyle.textDisabled,
+                    ]}
                 >
                     {text}
                 </Text>
             )}
             {!!useImage && (
                 <Image
-                    style={
+                    style={[
                         pressed
                             ? buttonStylePressed.buttonLargeImage
-                            : buttonStyle.buttonLargeImage
-                    }
+                            : buttonStyle.buttonLargeImage,
+                        disabled && buttonStyle.imageDisabled,
+                    ]}
                     source={image.uri}
                 />
             )}

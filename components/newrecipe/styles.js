@@ -228,6 +228,7 @@ export const stepsFormStyles = StyleSheet.create({
         fontWeight: "normal",
         textAlign: "left",
         justifyContent: "flex-start",
+        paddingRight: 20,
     },
     stepNoLineText: {
         width: "10%",
