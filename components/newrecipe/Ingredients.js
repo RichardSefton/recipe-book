@@ -13,7 +13,7 @@ const Ingredients = ({ ingredients }) => {
     const [ingredientsToDelete, setIngredientsToDelete] = useState([]);
 
     useEffect(() => {
-        //verify that the steps to delete actually exist in the steps array
+        //verify that the ingredients to delete actually exist in the ingredients array
         const remove = [];
         ingredientsToDelete.forEach((i) => {
             if (!ingredients.find((ingredient) => ingredient.id === i)) remove.push(i);

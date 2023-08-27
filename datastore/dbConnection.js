@@ -2,6 +2,7 @@
 import * as SQLite from 'expo-sqlite';
 import { tables } from './tables';
 import uuid from 'react-native-uuid';
+import { blackForestTrifle, fishFingerSandwich } from './testData';
 
 export const openDb = () => {
     try {
@@ -62,12 +63,51 @@ const primeDb = (conn) => new Promise((resolve, reject) => {
             tx.executeSql(`DELETE FROM ${tables.RECIPES}`, []);
             console.log("CLEARED DATA");
             console.log("PRIMING DATA");
+            const newBlackForestTrifle = {
+                ...blackForestTrifle,
+                id: uuid.v4()
+            };
             tx.executeSql(
                 `INSERT INTO ${tables.RECIPES} (id, name, description) values(?, ?, ?)`,
-                [uuid.v4(), "test", "test description"]
+                [newBlackForestTrifle.id, newBlackForestTrifle.name, newBlackForestTrifle.description]
             );
+            newBlackForestTrifle.ingredients.forEach(ingredient => {
+                tx.executeSql(
+                    `INSERT INTO ${tables.INGREDIENTS} (id, recipeId, ingredient, quantity, uom) values(?, ?, ?, ?, ?)`,
+                    [uuid.v4(), newBlackForestTrifle.id, ingredient.ingredient, ingredient.quantity, ingredient.uom]
+                );
+            });
+            newBlackForestTrifle.steps.forEach(step => {
+                tx.executeSql(
+                    `INSERT INTO ${tables.STEPS} (id, recipeId, step, stepOrder) values(?, ?, ?, ?)`,
+                    [uuid.v4(), newBlackForestTrifle.id, step.step, step.stepOrder]
+                );
+            });
+            const newFishFingerSandwich = {
+                ...fishFingerSandwich,
+                id: uuid.v4()
+            };
+            tx.executeSql(
+                `INSERT INTO ${tables.RECIPES} (id, name, description) values(?, ?, ?)`,
+                [newFishFingerSandwich.id, newFishFingerSandwich.name, newFishFingerSandwich.description]
+            );
+            newFishFingerSandwich.ingredients.forEach(ingredient => {
+                tx.executeSql(
+                    `INSERT INTO ${tables.INGREDIENTS} (id, recipeId, ingredient, quantity, uom) values(?, ?, ?, ?, ?)`,
+                    [uuid.v4(), newFishFingerSandwich.id, ingredient.ingredient, ingredient.quantity, ingredient.uom]
+                );
+            });
+            newFishFingerSandwich.steps.forEach(step => {
+                tx.executeSql(
+                    `INSERT INTO ${tables.STEPS} (id, recipeId, step, stepOrder) values(?, ?, ?, ?)`,
+                    [uuid.v4(), newFishFingerSandwich.id, step.step, step.stepOrder]
+                );
+            });
             resolve()
         },
-        error => reject(error)
+        error => {
+            console.log(error);
+            reject(error)
+        }
     );
 });
