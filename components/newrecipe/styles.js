@@ -96,7 +96,7 @@ export const ingredientsFormStyles = StyleSheet.create({
         width: "100%",
         height: 50,
         marginLeft: 15,
-        flex: 1,
+        // flex: 1,
     },
     addIngredientButtonText: {
         width: "100%",
@@ -125,7 +125,7 @@ export const ingredientsFormStyles = StyleSheet.create({
         textAlign: "left",
     },
     qtyLineText: {
-        width: "15%",
+        width: "10%",
         textAlign: "center",
     },
     uomLineText: {
@@ -133,10 +133,49 @@ export const ingredientsFormStyles = StyleSheet.create({
         textAlign: "left",
     },
     ingredientLineText: {
+        width: "50%",
         fontSize: 14,
         fontWeight: "normal",
         textAlign: "left",
         justifyContent: "flex-start",
+    },
+    editStepButtonContainer: {
+        width: "100%",
+        height: 50,
+        marginLeft: 15,
+        marginTop: 10,
+        marginBottom: 10,
+    },
+    deleteStepButtonContainer: {
+        width: "100%",
+        height: 50,
+        marginLeft: 15,
+        marginTop: 10,
+        marginBottom: 10,
+    },
+    editIconContainer: {
+        width: "10%",
+        justifyContent: "flex-start",
+        textAlign: "right",
+    },
+    deleteIconContainer: {
+        width: "10%",
+        justifyContent: "flex-start",
+        textAlign: "right",
+    },
+    editIngredientButtonContainer: {
+        width: "100%",
+        height: 50,
+        marginLeft: 15,
+        marginTop: 10,
+        marginBottom: 10,
+    },
+    deleteIngredientButtonContainer: {
+        width: "100%",
+        height: 50,
+        marginLeft: 15,
+        marginTop: 10,
+        marginBottom: 10,
     },
 });
 
@@ -296,6 +335,49 @@ export const deleteStepStyles = StyleSheet.create({
     deleteButton: {
         backgroundColor: "#f00",
     },  
+    buttonText: {
+        padding: 10,
+        fontSize: 14,
+        fontWeight: "bold",
+        color: "#fff",
+    },
+});
+
+export const deleteIngredientStyles = StyleSheet.create({
+    deleteIngredientContainer: {
+        flexDirection: "row",
+        justifyContent: "flex-start",
+        alignItems: "left",
+        marginBottom: 10,
+        marginRight: 20,
+        borderColor: "#7542f5",
+        borderBottomWidth: 1,
+        textAlign: "left",
+        paddingBottom: 10,
+    },
+    deleteIngredientButtonsContainer: {
+        width: "100%",
+        justifyContent: "center",
+        alignItems: "center",
+        textAlign: "center",
+        fontSize: 20,
+        fontWeight: "bold",
+        borderRadius: 5,
+        color: "#fff",
+        flexDirection: "row",
+        justifyContent: "space-around",
+        marginBottom: 10,
+    },
+    button: {
+        width: "40%",
+        justifyContent: "center",
+        alignItems: "center",
+        textAlign: "center",
+        backgroundColor: "#7542f5",
+    },
+    deleteButton: {
+        backgroundColor: "#f00",
+    },
     buttonText: {
         padding: 10,
         fontSize: 14,

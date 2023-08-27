@@ -15,6 +15,10 @@ import {
     cancelEditStep as cancelEditStepAction,
     saveEditStep as saveEditStepAction,
     deleteStep as deleteStepAction,
+    selectIngredientForEdit as selectIngredientForEditAction,
+    cancelEditIngredient as cancelEditIngredientAction,
+    saveEditIngredient as saveEditIngredientAction,
+    deleteIngredient as deleteIngredientAction,
 } from './actions';
 
 //dab hand at react redux. But the old way with actions and reducers
@@ -74,6 +78,10 @@ const recipeSlice = createSlice({
         cancelEditStep: cancelEditStepAction,
         saveEditStep: saveEditStepAction,
         deleteStep: deleteStepAction,
+        selectIngredientForEdit: selectIngredientForEditAction,
+        cancelEditIngredient: cancelEditIngredientAction,
+        saveEditIngredient: saveEditIngredientAction,
+        deleteIngredient: deleteIngredientAction,
     },
     extraReducers: (builder) => {
         builder.addCase(loadRecipes.pending, (state) => {
@@ -116,5 +124,9 @@ export const {
     cancelEditStep,
     saveEditStep,
     deleteStep,
+    selectIngredientForEdit,
+    cancelEditIngredient,
+    saveEditIngredient,
+    deleteIngredient,
 } = recipeSlice.actions;
 export default recipeSlice.reducer;

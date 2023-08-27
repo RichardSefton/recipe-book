@@ -73,6 +73,39 @@ export const deleteStep = (state, action) => {
     state.recipe.steps = sortedSteps;
 }
 
+export const selectIngredientForEdit = (state, action) => {
+    state.active.ingredient = action.payload;
+    state.active.editIngredient = true;
+};
+export const cancelEditIngredient = (state) => {
+    state.active.ingredient = {
+        id: '',
+        ingredient: '',
+        quantity: '',
+        unit: '',
+    };
+    state.active.editIngredient = false;
+};
+export const saveEditIngredient = (state, action) => {
+    const index = state.recipe.ingredients.findIndex(
+        (s) => s.id === action.payload.id
+    );
+    if (index === -1) return;
+    state.recipe.ingredients[index] = action.payload;
+    state.active.ingredient = {
+        id: '',
+        ingredient: '',
+        quantity: '',
+        unit: '',
+    };
+    state.active.editIngredient = false;
+};
+export const deleteIngredient = (state, action) => {
+    state.recipe.ingredients = [
+        ...state.recipe.ingredients.filter((s) => s.id !== action.payload.id),
+    ];
+};
+
 export const loadRecipes = createAsyncThunk('recipe/loadRecipes', async (_, { getState, rejectWithValue }) => {
     const { appSlice: { database } } = getState();
     try {
