@@ -43,10 +43,12 @@ export const createRecipe = (db, recipe) => new Promise((resolve, reject) => {
 export const getRecipes = async (db) => new Promise((resolve, reject) => {
     db.transaction(
         tx => {
-            tx.executeSql('SELECT * FROM recipes', [], 
+            tx.executeSql(
+                `
+                    SELECT id, name, description FROM ${tables.RECIPES}
+                `, [], 
                 (tx, results) => {
                     resolve(results.rows._array);
-
                 },
                 error => reject(error)
             );
@@ -57,24 +59,52 @@ export const getRecipes = async (db) => new Promise((resolve, reject) => {
     );
 });
 
-// export const saveTodoItems = async (
-//     db,
-//     todoItems
-// ) => {
-//     const insertQuery =
-//         `INSERT OR REPLACE INTO ${tableName}(name, value) values` +
-//         todoItems.map((i) => `(${i.id}, '${i.value}')`).join(",");
-
-//     return db.executeSql(insertQuery);
-// };
-
-// export const deleteTodoItem = async (db: SQLiteDatabase, id: number) => {
-//     const deleteQuery = `DELETE from ${tableName} where rowid = ${id}`;
-//     await db.executeSql(deleteQuery);
-// };
-
-// export const deleteTable = async (db: SQLiteDatabase) => {
-//     const query = `drop table ${tableName}`;
-
-//     await db.executeSql(query);
-// };
+export const getRecipe = async (db, _id) => new Promise((resolve, reject) => {
+    db.transaction(
+        tx => {
+            tx.executeSql(
+                `
+                    SELECT id, name, description FROM ${tables.RECIPES} WHERE id = ?
+                `, [_id], 
+                (tx, recipeResults) => {
+                    const { id } = recipeResults.rows._array?.[0]; 
+                    tx.executeSql(
+                        `
+                            SELECT id, recipeId, ingredient, quantity, uom FROM ${tables.INGREDIENTS} WHERE recipeId = ?
+                        `, [id], 
+                        (tx, ingredientResults) => {
+                            tx.executeSql(
+                                `
+                                    SELECT id, recipeId, step, stepOrder FROM ${tables.STEPS} WHERE recipeId = ?
+                                `, [id],
+                                (tx, stepResults) => {
+                                    const ingredients = ingredientResults.rows._array;
+                                    const steps = stepResults.rows._array;
+                                    return resolve({
+                                        ...recipeResults.rows._array?.[0],
+                                        ingredients,
+                                        steps: steps
+                                                .map(s => ({ ...s, stepNo: s.stepOrder }))
+                                                .sort((a, b) => a.stepOrder - b.stepOrder) 
+                                    });
+                                },
+                                error => {
+                                    console.log(error);
+                                    return reject(error);
+                                }
+                            );
+                        },
+                        error => {
+                            console.log(error);
+                            return reject(error);
+                        }
+                    ) 
+                },
+                error => reject(error)
+            );
+        },
+        error => {
+            reject(error);
+        }
+    );
+});

@@ -12,11 +12,11 @@ const Steps = ({ steps }) => {
     useEffect(() => {
         //verify that the steps to delete actually exist in the steps array
         const remove = [];
-        stepsToDelete.forEach(s => {
+        stepsToDelete?.forEach(s => {
             if (!steps.find(step => step.id === s))
                 remove.push(s);
         });
-        setStepsToDelete([...stepsToDelete.filter(s => !remove.includes(s))]);
+        setStepsToDelete([...stepsToDelete?.filter(s => !remove.includes(s))]);
     }, [steps]);
 
     // console.log('steps', steps);
@@ -37,9 +37,9 @@ const Steps = ({ steps }) => {
 
     return (
         <ScrollView scrollEnabled={true} style={styles.stepsListContainer}>
-            {steps.map((s) => (
+            {steps?.map((s) => (
                 <Fragment key={s.id}>
-                    {!stepsToDelete.includes(s.id) ? (
+                    {!stepsToDelete?.includes(s.id) ? (
                         <View key={s.id} style={styles.stepLineContainer}>
                             <Text
                                 style={[

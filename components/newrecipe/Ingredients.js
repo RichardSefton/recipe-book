@@ -15,10 +15,10 @@ const Ingredients = ({ ingredients }) => {
     useEffect(() => {
         //verify that the ingredients to delete actually exist in the ingredients array
         const remove = [];
-        ingredientsToDelete.forEach((i) => {
+        ingredientsToDelete?.forEach((i) => {
             if (!ingredients.find((ingredient) => ingredient.id === i)) remove.push(i);
         });
-        setIngredientsToDelete([...ingredientsToDelete.filter((i) => !remove.includes(i))]);
+        setIngredientsToDelete([...ingredientsToDelete?.filter((i) => !remove.includes(i))]);
     }, [ingredients]);
 
     const handleEditIngredient = (ingredient) => {
@@ -39,9 +39,9 @@ const Ingredients = ({ ingredients }) => {
             scrollEnabled={true}
             style={styles.ingredientsListContainer}
         >
-            {ingredients.map((i) => (
+            {ingredients?.map((i) => (
                 <Fragment key={i.id}>
-                    {!ingredientsToDelete.includes(i.id) ? (
+                    {!ingredientsToDelete?.includes(i.id) ? (
                         <View key={i.id} style={styles.ingredientLineContainer}>
                             <Text
                                 style={[

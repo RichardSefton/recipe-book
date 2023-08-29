@@ -1,6 +1,6 @@
 import { useState, useMemo, useEffect } from "react";
 import { useDispatch, connect } from "react-redux";
-import { createRecipe, toggleShowIngredients, toggleShowSteps } from "../../redux/recipeSlice/slice";
+import { createRecipe, toggleShowIngredients, toggleShowSteps, clearRecipe } from "../../redux/recipeSlice/slice";
 import { View } from "react-native";
 import { menuStyle } from './styles'
 import { useNavigation } from "@react-navigation/native";
@@ -20,17 +20,19 @@ const Menu = ({ navigationRef, recipe }) => {
     }, []);
 
     const recipeOkToSave = useMemo(() => {
-        return (!!recipe.name && !!recipe.description && !!(recipe.ingredients.length) && !!(recipe.steps.length));
+        if (!recipe) return false;
+        return (!!recipe?.name && !!recipe?.description && !!(recipe.ingredients?.length) && !!(recipe.steps?.length));
     }, [recipe]);
 
     const handleNewRecipe = () => {
+        dispatch(clearRecipe());
         navigation.navigate("NewRecipe");
     };
 
-    const openNewIngredientsCard = () => {
+    const openIngredientsCard = () => {
         dispatch(toggleShowIngredients());
     };
-    const openNewStepsCard = () => {
+    const openStepsCard = () => {
         dispatch(toggleShowSteps());
     }
 
@@ -47,7 +49,7 @@ const Menu = ({ navigationRef, recipe }) => {
                     <SmallButton
                         image={buttonImages.INGREDIENTS}
                         useImage={true}
-                        handlePressed={openNewIngredientsCard}
+                        handlePressed={openIngredientsCard}
                     />
                     <LargeButton
                         image={buttonImages.SAVE}
@@ -58,7 +60,21 @@ const Menu = ({ navigationRef, recipe }) => {
                     <SmallButton
                         image={buttonImages.STEPS}
                         useImage={true}
-                        handlePressed={openNewStepsCard}
+                        handlePressed={openStepsCard}
+                    />
+                </>
+            );
+            case 'Recipe': return (
+                <>
+                    <SmallButton
+                        image={buttonImages.INGREDIENTS}
+                        useImage={true}
+                        handlePressed={openIngredientsCard}
+                    />
+                    <SmallButton
+                        image={buttonImages.STEPS}
+                        useImage={true}
+                        handlePressed={openStepsCard}
                     />
                 </>
             );

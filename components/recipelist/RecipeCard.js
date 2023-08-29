@@ -1,7 +1,8 @@
 import { View, Text, Image, Pressable } from 'react-native';
 import { recipeCardStyle } from './style';
 
-const RecipeCard = ({ recipe, navigation }) => {
+const RecipeCard =   ({ recipe, navigation }) => {
+
     const handlePress = () => {
         navigation.navigate("Recipe", { recipe });
     };

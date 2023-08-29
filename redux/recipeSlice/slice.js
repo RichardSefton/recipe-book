@@ -1,7 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { 
     recipesAdapter,
-    loadRecipes, 
+    loadRecipes,
+    loadRecipe, 
     createRecipe,
     setRecipeName as setRecipeNameAction,
     setRecipeDescription as setRecipeDescriptionAction,
@@ -19,6 +20,8 @@ import {
     cancelEditIngredient as cancelEditIngredientAction,
     saveEditIngredient as saveEditIngredientAction,
     deleteIngredient as deleteIngredientAction,
+    selectRecipe as selectRecipeAction,
+    clearRecipe as clearRecipeAction,
 } from './actions';
 
 //dab hand at react redux. But the old way with actions and reducers
@@ -82,6 +85,8 @@ const recipeSlice = createSlice({
         cancelEditIngredient: cancelEditIngredientAction,
         saveEditIngredient: saveEditIngredientAction,
         deleteIngredient: deleteIngredientAction,
+        selectRecipe: selectRecipeAction,
+        clearRecipe: clearRecipeAction,
     },
     extraReducers: (builder) => {
         builder.addCase(loadRecipes.pending, (state) => {
@@ -106,10 +111,22 @@ const recipeSlice = createSlice({
             console.error('create recipe rejected', action.error);
             state.loading = false;
         });
+        builder.addCase(loadRecipe.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(loadRecipe.fulfilled, (state, action) => {
+            state.loading = false;
+            state.recipe = action.payload;
+        });
+        builder.addCase(loadRecipe.rejected, (state, action) => {
+            //we can handle error notifications here.
+            console.error('load recipe rejected', action.error, action);
+            state.loading = false;
+        });
     }
 });
 
-export { createRecipe, loadRecipes };
+export { createRecipe, loadRecipes, loadRecipe };
 
 export const { 
     setRecipeName, 
@@ -128,5 +145,7 @@ export const {
     cancelEditIngredient,
     saveEditIngredient,
     deleteIngredient,
+    selectRecipe,
+    clearRecipe,
 } = recipeSlice.actions;
 export default recipeSlice.reducer;
