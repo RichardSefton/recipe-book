@@ -4,6 +4,8 @@ import {
     loadRecipes,
     loadRecipe, 
     createRecipe,
+    deleteRecipe,
+    editRecipe,
     setRecipeName as setRecipeNameAction,
     setRecipeDescription as setRecipeDescriptionAction,
     addIngredient as addIngredientAction,
@@ -27,7 +29,6 @@ import {
 //dab hand at react redux. But the old way with actions and reducers
 //Never tried it with this toolkit before so should be fun. 
 //Working off example here: https://github.com/hybridheroes/redux-toolkit-example/blob/master
-
 
 const recipeSlice = createSlice({
     name: 'recipe',
@@ -123,10 +124,39 @@ const recipeSlice = createSlice({
             console.error('load recipe rejected', action.error, action);
             state.loading = false;
         });
+        builder.addCase(deleteRecipe.pending, (state) => {
+            //nothing to do really. Don't really want to remove from 
+            //state till the promise is fulfilled
+            //If we get time later we'll put in a quick little 
+            //deletion animation? but the deletion is so quick its pointless. 
+        });
+        builder.addCase(deleteRecipe.fulfilled, (state, action) => {
+            const recipeId = action.payload;
+            //Its removed from database so filter it out from the list of recipes. 
+            recipesAdapter.removeOne(state.recipes, recipeId);
+
+        });
+        builder.addCase(deleteRecipe.rejected, (state, action) => {
+            //Nothing to remove in an error state so 
+            //nothing to do really. To remove it from the state would 
+            //be idiotic as the next reload they would have it back again. 
+            //And there is no real mechanism yet to notify the users so I guess this
+            //is just somewhere for the rejection to go...
+            console.log(action.error);
+        });
+        builder.addCase(editRecipe.pending, (state) => {
+            //really not much to do here. the action should be quick anyway. 
+        });
+        builder.addCase(editRecipe.fulfilled, (state, action) => {
+            recipesAdapter.updateOne(state.recipes, action.payload.id);
+        });
+        builder.addCase(editRecipe.rejected, (state, action) => {
+            console.error('update recipe error', action.error);
+        });
     }
 });
 
-export { createRecipe, loadRecipes, loadRecipe };
+export { createRecipe, loadRecipes, loadRecipe, deleteRecipe, editRecipe };
 
 export const { 
     setRecipeName, 

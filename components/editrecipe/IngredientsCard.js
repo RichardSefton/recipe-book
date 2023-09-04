@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { Animated } from 'react-native';
 import { connect } from 'react-redux';
 import { ingredientsFormStyles as styles } from './styles';
-import NewIngredientsForm from './NewIngredientsForm';
+import IngredientsForm from './IngredientsForm';
 import Ingredients from './Ingredients';
 import EditIngredientsForm from './EditIngredientsForm';
 
@@ -40,7 +40,7 @@ const IngredientsCard = ({ showIngredients, editIngredient }) => {
                 editIngredient ? (
                     <EditIngredientsForm />
                 ) : (
-                    <NewIngredientsForm />
+                    <IngredientsForm />
                 )
             }
             <Ingredients />

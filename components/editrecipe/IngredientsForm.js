@@ -7,7 +7,7 @@ import { RectangleButton as Button } from '../buttons';
 import { useDispatch } from 'react-redux';
 import { addIngredient } from '../../redux/recipeSlice/slice';
 
-const NewIngredientsForm = ({ }) => {
+const IngredientsForm = ({ }) => {
     const dispatch = useDispatch();
     const dropdownRef = useRef(null);
     const [ingredient, setIngredient] = useState('');
@@ -76,4 +76,4 @@ const NewIngredientsForm = ({ }) => {
     );
 };
 
-export default NewIngredientsForm;
+export default IngredientsForm;

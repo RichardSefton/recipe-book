@@ -4,7 +4,7 @@ import { TextInput, View } from 'react-native';
 import { recipeFormStyles as styles } from "./styles";
 import { setRecipeName, setRecipeDescription, clearIngredients, clearSteps } from '../../redux/recipeSlice/slice';
 
-const NewRecipeForm = ({ recipeName, recipeDescription }) => {
+const RecipeForm = ({ recipeName, recipeDescription }) => {
     const dispatch = useDispatch();
 
     const handleRecipeNameChange = name => dispatch(setRecipeName(name));
@@ -21,7 +21,7 @@ const NewRecipeForm = ({ recipeName, recipeDescription }) => {
     }, []);
 
     return (
-        <View style={styles.newRecipeFormContainer}>
+        <View style={styles.RecipeFormContainer}>
             <TextInput 
                 style={styles.textInput}
                 onChange={e => handleRecipeNameChange(e.nativeEvent.text)}
@@ -43,4 +43,4 @@ const NewRecipeForm = ({ recipeName, recipeDescription }) => {
 export default connect(({ recipeSlice }) => ({
     recipeName: recipeSlice.recipe.name,
     recipeDescription: recipeSlice.recipe.description
-}))(NewRecipeForm);
+}))(RecipeForm);

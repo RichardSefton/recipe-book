@@ -1,12 +1,7 @@
-import { View, Text, Image, Pressable } from 'react-native';
+import { View, Text, Image } from 'react-native';
 import { recipeCardStyle } from './style';
 
-const RecipeCard =   ({ recipe, navigation }) => {
-
-    const handlePress = () => {
-        navigation.navigate("Recipe", { recipe });
-    };
-
+const RecipeCard =   ({ recipe }) => {
     return (
         <View style={recipeCardStyle.container}>
             <View style={recipeCardStyle.details}>
@@ -15,15 +10,12 @@ const RecipeCard =   ({ recipe, navigation }) => {
                     {recipe.description}
                 </Text>
             </View>
-            <Pressable 
-                style={recipeCardStyle.buttonContainer}
-                onPress={handlePress}
-            >
+            <View style={recipeCardStyle.imageContainer}>
                 <Image
                     style={recipeCardStyle.button}
                     source={require("../../assets/arrow_forward.png")}
                 />
-            </Pressable>
+            </View>
         </View>
     );
 };

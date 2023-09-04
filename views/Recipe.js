@@ -11,7 +11,7 @@ const Recipe = ({ navigation, route }) => {
     const dispatch = useDispatch();
 
     useFocusEffect(() => {
-        dispatch(loadRecipe(recipe.id));
+        dispatch(loadRecipe(recipe));
     });
 
     return (

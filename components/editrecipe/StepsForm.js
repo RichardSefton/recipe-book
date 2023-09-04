@@ -7,7 +7,7 @@ import { RectangleButton as Button } from "../buttons";
 import { useDispatch, connect } from "react-redux";
 import { addStep } from "../../redux/recipeSlice/slice";
 
-const NewStepsForm = ({ steps }) => {
+const StepsForm = ({ steps }) => {
     const dispatch = useDispatch();
     const [step, setStep] = useState("");
 
@@ -46,4 +46,4 @@ const NewStepsForm = ({ steps }) => {
 
 export default connect(({ recipeSlice }) => ({
     steps: recipeSlice.recipe.steps,
-}))(NewStepsForm);
+}))(StepsForm);

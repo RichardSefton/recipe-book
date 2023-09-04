@@ -1,6 +1,6 @@
 import { useState, useMemo, useEffect } from "react";
 import { useDispatch, connect } from "react-redux";
-import { createRecipe, toggleShowIngredients, toggleShowSteps, clearRecipe } from "../../redux/recipeSlice/slice";
+import { createRecipe, toggleShowIngredients, toggleShowSteps, clearRecipe, editRecipe, loadRecipes } from "../../redux/recipeSlice/slice";
 import { View } from "react-native";
 import { menuStyle } from './styles'
 import { useNavigation } from "@react-navigation/native";
@@ -42,28 +42,39 @@ const Menu = ({ navigationRef, recipe }) => {
             .catch((err) => console.error(err));
     };
 
+    const handleEditRecipe = () => {
+        dispatch(editRecipe())
+            .then(() => {
+                dispatch(loadRecipes());        
+                navigation.navigate("RecipeList")
+            })
+            .catch((err) => console.error(err));
+    }
+
     const navButtons = useMemo(() => {
         switch(route) {
-            case 'NewRecipe': return (
-                <>
-                    <SmallButton
-                        image={buttonImages.INGREDIENTS}
-                        useImage={true}
-                        handlePressed={openIngredientsCard}
-                    />
-                    <LargeButton
-                        image={buttonImages.SAVE}
-                        useImage={true}
-                        handlePressed={handleSaveRecipe}
-                        disabled={!recipeOkToSave}
-                    />
-                    <SmallButton
-                        image={buttonImages.STEPS}
-                        useImage={true}
-                        handlePressed={openStepsCard}
-                    />
-                </>
-            );
+            case 'EditRecipe':
+            case 'NewRecipe': 
+                return (
+                    <>
+                        <SmallButton
+                            image={buttonImages.INGREDIENTS}
+                            useImage={true}
+                            handlePressed={openIngredientsCard}
+                        />
+                        <LargeButton
+                            image={buttonImages.SAVE}
+                            useImage={true}
+                            handlePressed={route === 'NewRecipe' ? handleSaveRecipe : handleEditRecipe}
+                            disabled={!recipeOkToSave}
+                        />
+                        <SmallButton
+                            image={buttonImages.STEPS}
+                            useImage={true}
+                            handlePressed={openStepsCard}
+                        />
+                    </>
+                );
             case 'Recipe': return (
                 <>
                     <SmallButton

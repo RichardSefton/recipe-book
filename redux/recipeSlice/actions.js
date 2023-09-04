@@ -1,5 +1,11 @@
 import { createAsyncThunk, createEntityAdapter } from "@reduxjs/toolkit";
-import { getRecipes, getRecipe, createRecipe as createRecipeRecord } from "../../datastore";
+import { 
+    getRecipes, 
+    getRecipe, 
+    createRecipe as createRecipeRecord, 
+    deleteRecipe as deleteRecipeRecord,  
+    editRecipe as editRecipeRecord,
+} from "../../datastore";
 import uuid from "react-native-uuid";
 import { validateNewRecipe } from "./validation";
 
@@ -153,6 +159,32 @@ export const createRecipe = createAsyncThunk('recipe/createRecipe', async (_, { 
         return newRecipe;
     } catch(error) {
         console.error('create recipe error', error);
+        return rejectWithValue(error);
+    }
+});
+
+export const editRecipe = createAsyncThunk('recipe/editRecipe', async (_, { getState, rejectWithValue, dispatch }) => {
+    const { appSlice: { database }, recipeSlice: { recipe } } = getState();
+    console.log(recipe);
+    try {
+        const { validated, message } = validateNewRecipe(recipe);
+        if (!validated) return rejectWithValue(message);
+        editRecipeRecord(database, recipe);
+        return recipe;
+    } catch(error) {
+        console.error(error);
+        return rejectWithValue(error)
+    }
+
+});
+
+export const deleteRecipe = createAsyncThunk('recipe/deleteRecipe', async (recipeId, { getState, rejectWithValue, dispatch}) => {
+    const { appSlice: { database } } = getState();
+    try {
+        await deleteRecipeRecord(database, recipeId);
+        return recipeId;
+    } catch(error) {
+        console.error('delete recipe error', error);
         return rejectWithValue(error);
     }
 });

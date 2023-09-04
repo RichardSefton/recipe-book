@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 export const recipeFormStyles = StyleSheet.create({
-    newRecipeFormContainer: {
+    RecipeFormContainer: {
         width: "100%",
         alignItems: "center",
     },

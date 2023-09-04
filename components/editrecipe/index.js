@@ -1,9 +1,9 @@
-import NewRecipeForm from "./NewRecipeForm";
+import RecipeForm from "./RecipeForm";
 import IngredientsCard from "./IngredientsCard";
 import StepsCard from "./StepsCard";
 
 export { 
-    NewRecipeForm,
+    RecipeForm,
     IngredientsCard,
     StepsCard,
 };

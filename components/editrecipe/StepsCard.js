@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { Animated } from "react-native";
 import { connect } from "react-redux";
 import { stepsFormStyles as styles } from "./styles";
-import NewStepsForm from "./NewStepsForm";
+import StepsForm from "./StepsForm";
 import Steps from "./Steps";
 import EditStepsForm from './EditStepsForm';
 
@@ -41,7 +41,7 @@ const StepsCard = ({ showSteps, editStep }) => {
                 editStep ? (
                     <EditStepsForm />
                 ) : (
-                    <NewStepsForm />
+                    <StepsForm />
                 )
             }
             <Steps />

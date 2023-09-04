@@ -103,8 +103,84 @@ export const getRecipe = async (db, _id) => new Promise((resolve, reject) => {
                 error => reject(error)
             );
         },
-        error => {
-            reject(error);
-        }
+        error => reject(error)
+    );
+});
+
+export const deleteRecipe = (db, _id) => new Promise((resolve, reject) => {
+    db.transaction(
+        tx => {
+            //We don't really care much for the results. Assume they deleted
+            tx.executeSql(
+                `DELETE FROM ${tables.RECIPES} WHERE id = ?`,
+                [_id]
+            );
+            tx.executeSql(
+                `DELETE FROM ${tables.INGREDIENTS} WHERE recipeId = ?`,
+                [_id]   
+            );
+            tx.executeSql(
+                `DELETE FROM ${tables.STEPS} WHERE recipeId = ?`,
+                [_id]
+            );
+            return resolve();
+        },
+        error => reject(error)
+    );
+});
+
+export const editRecipe = (db, recipe) => new Promise((resolve, reject) => {
+    const recipeQuery = `
+        UPDATE ${tables.RECIPES}
+        SET name = ?, description = ?
+        WHERE id = ?     
+    `;
+    const ingredientsQuery = `
+        UPDATE ${tables.INGREDIENTS}
+        SET ingredient = ?, quantity = ?, uom = ?
+        WHERE recipeId = ? AND id = ? 
+    `;
+    const stepsQuery = `
+        UPDATE ${tables.STEPS}
+        SET step = ?, stepOrder = ?
+        WHERE recipeId = ? AND id = ? 
+    `;
+    db.transaction(
+        (tx) => {
+            const recipeToUpdate = {
+                name: recipe.name,
+                description: recipe.description,
+            };
+            tx.executeSql(
+                recipeQuery,
+                [recipeToUpdate.name, recipeToUpdate.description, recipe.id],
+                () => {},
+                (error) => reject(error)
+            );
+            recipe.ingredients.forEach((ingredient) => {
+                tx.executeSql(
+                    ingredientsQuery,
+                    [
+                        ingredient.ingredient,
+                        ingredient.quantity,
+                        ingredient.uom,
+                        recipe.id,
+                        ingredient.id,
+                    ],
+                    () => {},
+                    (error) => reject(error)
+                );
+            });
+            recipe.steps.forEach((step) => {
+                tx.executeSql(
+                    stepsQuery,
+                    [step.step, step.stepOrder, step.id, recipe.id],
+                    () => {},
+                    (error) => reject(error)
+                );
+            });
+            resolve(recipe);
+        },
+        (error) => reject(error)
     );
 });

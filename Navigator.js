@@ -2,7 +2,7 @@ import { useRef, useEffect, useMemo } from 'react';
 import { SafeAreaView, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { RecipeList, Recipe, NewRecipe } from "./views";
+import { RecipeList, Recipe, NewRecipe, EditRecipe } from "./views";
 import { AppStyle } from "./styles";
 import { Menu } from "./components/menubar";
 import { setDatabaseConnection, setLoading, setProgress } from "./redux/appSlice/slice";
@@ -89,6 +89,13 @@ const Navigator = ({ loading, progress }) => {
                         component={NewRecipe}
                         options={{
                             headerTitle: "New Recipe",
+                        }}
+                    />
+                    <Stack.Screen
+                        name="EditRecipe"
+                        component={EditRecipe}
+                        options={{
+                            headerTitle: "Edit Recipe",
                         }}
                     />
                 </Stack.Group>

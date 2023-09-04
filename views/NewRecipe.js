@@ -1,6 +1,6 @@
 import { SafeAreaView } from "react-native";
 import { styles } from "./styles";
-import { NewRecipeForm, IngredientsCard, StepsCard } from '../components/newrecipe';
+import { RecipeForm, IngredientsCard, StepsCard } from '../components/editrecipe';
 
 const NewRecipe = ({ }) => {
 
@@ -8,7 +8,7 @@ const NewRecipe = ({ }) => {
         <>
             <SafeAreaView style={styles.modalContainer}>
                 <IngredientsCard />
-                <NewRecipeForm />
+                <RecipeForm />
                 <StepsCard />
             </SafeAreaView>
         </>
