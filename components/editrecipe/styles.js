@@ -385,3 +385,49 @@ export const deleteIngredientStyles = StyleSheet.create({
         color: "#fff",
     },
 });
+
+export const recipeImageStyles = StyleSheet.create({
+    container: {
+        // height: "100%",
+    },
+    buttonsContainer: {
+        flexDirection: "row",
+        justifyContent: "space-evenly",
+        height: 50,
+    },
+    button: {
+        width: "45%",
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    buttonText: {
+        color: "#fff",
+        fontSize: 16,
+        fontWeight: "bold",
+    },
+    imagesContainer: {
+        flexDirection: "row",
+        flexWrap: "wrap",
+        // justifyContent: 'flex-start',
+        // flexDirection: 'column',
+        height: 120,
+        justifyContent: "space-evenly",
+        marginTop: 10,
+    },
+    image: {
+        margin: 10,
+        width: 100,
+        height: 100,
+    },
+    selectedImageContainer: {
+        position: "absolute",
+        height: 580,
+        width: "100%",
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    selectedImage: {
+        width: 200,
+        height: 200,
+    },
+}); 

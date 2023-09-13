@@ -89,13 +89,13 @@ export const getRecipe = async (db, _id) => new Promise((resolve, reject) => {
                                     });
                                 },
                                 error => {
-                                    console.log(error);
+                                    console.error(error);
                                     return reject(error);
                                 }
                             );
                         },
                         error => {
-                            console.log(error);
+                            console.error(error);
                             return reject(error);
                         }
                     ) 

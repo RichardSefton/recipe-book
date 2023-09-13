@@ -13,7 +13,7 @@ const RectangleButton = ({ children, pressAction = () => { }, style = {}, styles
             retArr.push(...styles);
         };
         return retArr;
-    }, []);
+    }, [style, styles]);
 
     const pressableStyle = useMemo(() => pressed ? buttonStylePressed.buttonRectangle : buttonStyle.buttonRectangle, [pressed]);
 

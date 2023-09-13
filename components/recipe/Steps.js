@@ -4,7 +4,6 @@ import { ScrollView, View, Text } from "react-native";
 import { stepsStyles as styles} from "./styles";
 
 const Steps = ({ steps }) => {
-    console.log(steps);
     return (
         <ScrollView scrollEnabled={true} style={styles.stepsListContainer}>
             {steps?.map((s) => (

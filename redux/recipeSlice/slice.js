@@ -8,6 +8,7 @@ import {
     editRecipe,
     setRecipeName as setRecipeNameAction,
     setRecipeDescription as setRecipeDescriptionAction,
+    addRecipeImage as addRecipeImageAction,
     addIngredient as addIngredientAction,
     toggleShowIngredients as toggleShowIngredientsAction,
     toggleShowSteps as toggleShowStepsAction,
@@ -39,6 +40,7 @@ const recipeSlice = createSlice({
             description: '',
             ingredients: [],
             steps: [],
+            images: [],
         },
         active: {
             recipe: {
@@ -47,6 +49,7 @@ const recipeSlice = createSlice({
                 description: '',
                 ingredients: [],
                 steps: [],
+                images: [],
             },
             step: {
                 id: '',
@@ -72,6 +75,7 @@ const recipeSlice = createSlice({
         //reducers go here...
         setRecipeName: setRecipeNameAction,
         setRecipeDescription: setRecipeDescriptionAction,
+        addRecipeImage: addRecipeImageAction,
         addIngredient: addIngredientAction,
         addStep: addStepAction,
         toggleShowIngredients: toggleShowIngredientsAction,
@@ -161,6 +165,7 @@ export { createRecipe, loadRecipes, loadRecipe, deleteRecipe, editRecipe };
 export const { 
     setRecipeName, 
     setRecipeDescription,
+    addRecipeImage,
     addIngredient,
     addStep,
     toggleShowIngredients,

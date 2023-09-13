@@ -25,6 +25,15 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photoPermission": "Allow the app access to your photos to attach recipe images.",
+          "cameraPermission": "Allow the app access to your camera to take recipe images."
+        }
+      ]
+    ]
   }
 }

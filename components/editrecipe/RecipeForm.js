@@ -3,6 +3,7 @@ import { connect, useDispatch } from 'react-redux';
 import { TextInput, View } from 'react-native';
 import { recipeFormStyles as styles } from "./styles";
 import { setRecipeName, setRecipeDescription, clearIngredients, clearSteps } from '../../redux/recipeSlice/slice';
+import RecipeImages from './RecipeImages';
 
 const RecipeForm = ({ recipeName, recipeDescription }) => {
     const dispatch = useDispatch();
@@ -36,6 +37,7 @@ const RecipeForm = ({ recipeName, recipeDescription }) => {
                 multiline={true}
                 numberOfLines={5}
             />
+            <RecipeImages />
         </View>
     );
 };

@@ -24,8 +24,6 @@ const StepsForm = ({ steps }) => {
         setStep("");
     };
 
-    console.log(steps);
-
     return (
         <View styles={styles.stepsFormContainer}>
             <TextInput

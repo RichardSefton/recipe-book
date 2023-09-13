@@ -39,6 +39,13 @@ export const createTables = (conn) => new Promise((resolve, reject) => {
                     step VARCHAR(2048),
                     stepOrder INTEGER
                 )
+            `);
+            tx.executeSql(`
+                CREATE TABLE IF NOT EXISTS ${tables.RECIPEIMAGES} (
+                    id VARCHAR(36) PRIMARY KEY,
+                    recipeId VARCHAR(36),
+                    imageUri VARCHAR(512)
+                )
             `)
             //We want to prime the database if we are in Development mode
             if (__DEV__)
@@ -106,7 +113,7 @@ const primeDb = (conn) => new Promise((resolve, reject) => {
             resolve()
         },
         error => {
-            console.log(error);
+            console.error(error);
             reject(error)
         }
     );
