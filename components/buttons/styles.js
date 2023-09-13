@@ -73,7 +73,7 @@ export const buttonStyle = StyleSheet.create({
         backgroundColor: "#7542f5",
         textAlign: "center",
         justifyContent: "center",
-        zIndex: 99,
+        // zIndex: 99,
         elevation: 50,
     },
     disabled: {

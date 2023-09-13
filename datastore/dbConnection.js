@@ -6,7 +6,7 @@ import { blackForestTrifle, fishFingerSandwich } from './testData';
 
 export const openDb = () => {
     try {
-        const conn = SQLite.openDatabase('recipebook.db', '1.3');
+        const conn = SQLite.openDatabase('recipebook.db', '1.5');
         return conn;   
     } catch(error) {
         console.error(error);
@@ -16,14 +16,18 @@ export const openDb = () => {
 export const createTables = (conn) => new Promise((resolve, reject) => {
     conn.transaction(
         (tx) => {
-            tx.executeSql(`
+            tx.executeSql(
+                `
                 CREATE TABLE IF NOT EXISTS ${tables.RECIPES} (
                     id VARCHAR(36) PRIMARY KEY,
                     name VARCHAR(128),
                     description VARCHAR(512)
                 )
-            `, []);
-            tx.executeSql(`
+            `,
+                []
+            );
+            tx.executeSql(
+                `
                 CREATE TABLE IF NOT EXISTS ${tables.INGREDIENTS} (
                     id VARCHAR(36) PRIMARY KEY,
                     recipeId VARCHAR(36),
@@ -31,7 +35,9 @@ export const createTables = (conn) => new Promise((resolve, reject) => {
                     quantity INTEGER,
                     uom VARCHAR(64)
                 )
-            `, []);
+            `,
+                []
+            );
             tx.executeSql(`
                 CREATE TABLE IF NOT EXISTS ${tables.STEPS} (
                     id VARCHAR(36) PRIMARY KEY,
@@ -40,20 +46,21 @@ export const createTables = (conn) => new Promise((resolve, reject) => {
                     stepOrder INTEGER
                 )
             `);
+            //VARCHAR(MAX) is not supported in SQLite. But a value makes no difference according to
+            //https://www.allindiaexams.in/interview/interview-questions-and-answers/databases/sqlite/discussion/10023
             tx.executeSql(`
                 CREATE TABLE IF NOT EXISTS ${tables.RECIPEIMAGES} (
                     id VARCHAR(36) PRIMARY KEY,
                     recipeId VARCHAR(36),
-                    imageUri VARCHAR(512)
+                    base64 VARCHAR(10000)
                 )
-            `)
+            `, [],()=>{},(error)=>console.error(error));
             //We want to prime the database if we are in Development mode
             if (__DEV__)
                 primeDb(conn)
                     .then(() => resolve())
-                    .catch(error => reject(error));
+                    .catch((error) => reject(error));
             else resolve();
-            
         },
         (error) => {
             conn.closeAsync();

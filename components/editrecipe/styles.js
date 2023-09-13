@@ -40,7 +40,7 @@ export const ingredientsFormStyles = StyleSheet.create({
         backgroundColor: "#f2f0f7",
         zIndex: 1,
         borderTopRightRadius: 20,
-             elevation: 5,
+        elevation: 5,
     },
     ingredientsFormContainer: {
         width: "100%",
@@ -391,6 +391,7 @@ export const recipeImageStyles = StyleSheet.create({
         // height: "100%",
     },
     buttonsContainer: {
+        width: "100%",
         flexDirection: "row",
         justifyContent: "space-evenly",
         height: 50,
@@ -420,8 +421,6 @@ export const recipeImageStyles = StyleSheet.create({
         height: 100,
     },
     selectedImageContainer: {
-        position: "absolute",
-        height: 580,
         width: "100%",
         justifyContent: "center",
         alignItems: "center",

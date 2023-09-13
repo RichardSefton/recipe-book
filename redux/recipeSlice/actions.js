@@ -5,7 +5,6 @@ import {
     createRecipe as createRecipeRecord, 
     deleteRecipe as deleteRecipeRecord,  
     editRecipe as editRecipeRecord,
-    insertRecipeImage,
 } from "../../datastore";
 import uuid from "react-native-uuid";
 import { validateNewRecipe } from "./validation";
@@ -24,7 +23,7 @@ export const setRecipeDescription = (state, action) => {
 };
 
 export const addRecipeImage = (state, action) => {
-    state.recipe.images.push({ uri: action.payload, id: uuid.v4() });
+    state.recipe.images.push({ base64: action.payload, id: uuid.v4() });
 };
 
 export const addIngredient = (state, action) => {
@@ -162,10 +161,6 @@ export const createRecipe = createAsyncThunk('recipe/createRecipe', async (_, { 
         const { validated, message } = validateNewRecipe(recipe);
         if (!validated) return rejectWithValue(message); 
         const newRecipe = await createRecipeRecord(database, recipe);
-        const { id: newRecipeId, images } = recipe;
-        const promiseArr = [] 
-        images.forEach(img => promiseArr.push(insertRecipeImage(database, img, newRecipeId)));
-        await Promise.all(promiseArr); //don't care about the result but still wait for insertions to complete
         return newRecipe;
     } catch(error) {
         console.error('create recipe error', error);

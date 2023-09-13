@@ -25,15 +25,13 @@ const RecipeImages = ({ images }) => {
                     mediaTypes: ImagePicker.MediaTypeOptions.All,
                     // allowsEditing: true, //not allowed with multiselection
                     allowsMultipleSelection: true,
-                    //If we can get away with it, we'll store the uri
-                    //as this will have a lower memory footprint.
-                    // base64: true,
+                    base64: true,
                     cameraType: ImagePicker.CameraType.back,
                     quality: 1,
                 });
 
                 result?.assets?.forEach((img) =>
-                    dispatch(addRecipeImage(img.uri))
+                    dispatch(addRecipeImage(img.base64))
                 );
 
             }
@@ -50,21 +48,20 @@ const RecipeImages = ({ images }) => {
             let result = await ImagePicker.launchCameraAsync({
                 mediaTypes: ImagePicker.MediaTypeOptions.All,
                 allowsEditing: true,
-                // base64: true,
+                base64: true,
                 cameraType: ImagePicker.CameraType.back,
                 quality: 1,
             });
 
             result?.assets?.forEach(img => 
-                dispatch(addRecipeImage(img.uri ))
+                dispatch(addRecipeImage(img.base64))
             );
         }
     };
 
-    console.log(selectedImage);
-
     return (
-        <View style={styles.container}>
+        // <View style={styles.container}>
+        <>
             <View style={styles.buttonsContainer}>
                 <RectangleButton pressAction={pickImage} style={styles.button}>
                     <Text style={styles.buttonText}>Choose Images</Text>
@@ -82,7 +79,7 @@ const RecipeImages = ({ images }) => {
                         {images.map((img) => (
                             <Pressable key={img.id} onPress={() => setSelectedImage(img)}>
                                 <Image
-                                    source={{ uri: img.uri }}
+                                    source={{ uri: `data:image/png;base64,${img.base64}` }}
                                     style={styles.image}
                                 />
                             </Pressable>
@@ -91,10 +88,11 @@ const RecipeImages = ({ images }) => {
             )}
             {selectedImage && (
                 <View style={styles.selectedImageContainer}>
-                    <Image source={{ uri: selectedImage.uri }} style={styles.selectedImage} />
+                    <Image source={{ uri: `data:image/png;base64,${selectedImage.base64}` }} style={styles.selectedImage} />
                 </View>
             )}
-        </View>
+        </>
+        // </View>
     );
 };
 

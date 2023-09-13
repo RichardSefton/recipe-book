@@ -5,6 +5,7 @@ export const createRecipe = (db, recipe) => new Promise((resolve, reject) => {
     const recipeQuery = `INSERT INTO ${tables.RECIPES} (id, name, description) values(?, ?, ?)`;
     const ingredientsQuery = `INSERT INTO ${tables.INGREDIENTS} (id, recipeId, ingredient, quantity, uom) values(?, ?, ?, ?, ?)`;
     const stepsQuery = `INSERT INTO ${tables.STEPS} (id, recipeId, step, stepOrder) values(?, ?, ?, ?)`;
+    const imagesQuery = `INSERT INTO ${tables.RECIPEIMAGES} (id, recipeId, base64) values(?, ?, ?)`;
     db.transaction(
         (tx) => {
             const newRecipe = {
@@ -34,6 +35,14 @@ export const createRecipe = (db, recipe) => new Promise((resolve, reject) => {
                     (error) => reject(error)
                 )
             });
+            recipe.images.forEach(image => {
+                tx.executeSql(
+                    imagesQuery,
+                    [image.id, newRecipe.id, image.base64],
+                    () => resolve(),
+                    (error) => reject(error)
+                );
+            })
             resolve(newRecipe);
         },
         (error) => reject(error)
@@ -78,15 +87,36 @@ export const getRecipe = async (db, _id) => new Promise((resolve, reject) => {
                                     SELECT id, recipeId, step, stepOrder FROM ${tables.STEPS} WHERE recipeId = ?
                                 `, [id],
                                 (tx, stepResults) => {
-                                    const ingredients = ingredientResults.rows._array;
-                                    const steps = stepResults.rows._array;
-                                    return resolve({
-                                        ...recipeResults.rows._array?.[0],
-                                        ingredients,
-                                        steps: steps
-                                                .map(s => ({ ...s, stepOrder: s.stepOrder }))
-                                                .sort((a, b) => a.stepOrder - b.stepOrder) 
-                                    });
+                                    tx.executeSql(
+                                        `
+                                            SELECT id, base64, recipeId FROM ${tables.RECIPEIMAGES} WHERE recipeId = ?
+                                        `,
+                                        [id],
+                                        (tx, imageResults) => {
+                                            const ingredients =
+                                                ingredientResults.rows._array;
+                                            const steps =
+                                                stepResults.rows._array;
+                                            const images =
+                                                imageResults.rows._array;
+                                            return resolve({
+                                                ...recipeResults.rows
+                                                    ._array?.[0],
+                                                ingredients,
+                                                images,
+                                                steps: steps
+                                                    .map((s) => ({
+                                                        ...s,
+                                                        stepOrder: s.stepOrder,
+                                                    }))
+                                                    .sort(
+                                                        (a, b) =>
+                                                            a.stepOrder -
+                                                            b.stepOrder
+                                                    ),
+                                            });
+                                        }
+                                    );
                                 },
                                 error => {
                                     console.error(error);
@@ -98,7 +128,7 @@ export const getRecipe = async (db, _id) => new Promise((resolve, reject) => {
                             console.error(error);
                             return reject(error);
                         }
-                    ) 
+                    );
                 },
                 error => reject(error)
             );
