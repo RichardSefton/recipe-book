@@ -1,8 +1,9 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { Pressable } from "react-native";
 import { buttonStyle, buttonStylePressed } from "./styles";
 
 const RectangleButton = ({ children, pressAction = () => { }, style = {}, styles = [] }) => {
+    const [pressed, setPressed] = useState(false);
     const additionalStyles = useMemo(() => {
         const retArr = [];
         if (!!(Object.keys(style).length)) {
@@ -14,15 +15,17 @@ const RectangleButton = ({ children, pressAction = () => { }, style = {}, styles
         return retArr;
     }, []);
 
+    const pressableStyle = useMemo(() => pressed ? buttonStylePressed.buttonRectangle : buttonStyle.buttonRectangle, [pressed]);
+
     return (
         <Pressable
             style={[
-                ({pressed}) => pressed ? 
-                    buttonStylePressed.buttonRectangle
-                    : buttonStyle.buttonRectangle,
+                pressableStyle,
                 ...additionalStyles
             ]}
+            onPressIn={() => setPressed(true)}
             onPress={pressAction}
+            onPressOut={() => setPressed(false)}
         >
             {children}
         </Pressable>

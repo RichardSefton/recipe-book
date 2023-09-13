@@ -44,10 +44,10 @@ const Steps = ({ steps }) => {
                             <Text
                                 style={[
                                     styles.stepLineText,
-                                    styles.stepNoLineText,
+                                    styles.stepOrderLineText,
                                 ]}
                             >
-                                {`${s.stepNo}`}
+                                {`${s.stepOrder}`}
                             </Text>
                             <Text style={[styles.stepLineText]}>{s.step}</Text>
                             <View style={styles.editIconContainer}>

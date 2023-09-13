@@ -50,7 +50,7 @@ const recipeSlice = createSlice({
             },
             step: {
                 id: '',
-                stepNo: '',
+                stepOrder: '',
                 step: '',
             },
             ingredient: {

@@ -4,11 +4,21 @@ export const recipeStyles = StyleSheet.create({
     recipeContainer: {
         width: "100%",
         alignItems: "center",
+        backgroundColor: "#f2f2f2",
+    },
+    recipeNameContainer: {
+        width: "100%",
+        alignItems: "center",
     },
     recipeName: {
         fontSize: 24,
         fontWeight: "bold",
         marginTop: 20,
+    },
+    recipeEditContainer: {
+        position: "absolute",
+        right: 10,
+        top: 20,
     },
     recipeDescription: {
         fontSize: 18,
@@ -23,18 +33,10 @@ export const stepsStyles = StyleSheet.create({
         right: 0,
         width: "98%",
         height: "99%",
-        backgroundColor: "#f2f0f7",
+        backgroundColor: "#f2f2f2",
         zIndex: 1,
         borderTopLeftRadius: 20,
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 10,
-            height: 10,
-        },
-        shadowRadius: 3.84,
-        elevation: 5,
-        opacity: 0.99,
-        shadowOpacity: 0.1,
+        elevation: 25,
     },
     stepsListContainer: {
         marginBottom: 125,
@@ -57,7 +59,7 @@ export const stepsStyles = StyleSheet.create({
         justifyContent: "flex-start",
         width: "70%",
     },
-    stepNoLineText: {
+    stepOrderLineText: {
         width: "10%",
         justifyContent: "flex-start",
         textAlign: "left",
@@ -71,18 +73,10 @@ export const ingredientsStyles = StyleSheet.create({
         bottom: 0,
         width: "98%",
         height: "99%",
-        backgroundColor: "#f2f0f7",
+        backgroundColor: "#f2f2f2",
         zIndex: 1,
         borderTopRightRadius: 20,
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 10,
-            height: 10,
-        },
-        shadowRadius: 3.84,
         elevation: 5,
-        opacity: 0.99,
-        shadowOpacity: 0.1,
     },
     ingredientsListContainer: {
         marginTop: 50,

@@ -20,9 +20,11 @@ const StepsForm = ({ steps }) => {
 
     const handleAddStep = () => {
         if (!(!!step)) return;
-        dispatch(addStep({ stepNo: steps.length + 1, step }));
+        dispatch(addStep({ stepOrder: steps.length + 1, step }));
         setStep("");
     };
+
+    console.log(steps);
 
     return (
         <View styles={styles.stepsFormContainer}>

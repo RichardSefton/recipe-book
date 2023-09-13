@@ -4,7 +4,7 @@ import { ScrollView, View, Text } from "react-native";
 import { stepsStyles as styles} from "./styles";
 
 const Steps = ({ steps }) => {
-
+    console.log(steps);
     return (
         <ScrollView scrollEnabled={true} style={styles.stepsListContainer}>
             {steps?.map((s) => (
@@ -13,10 +13,10 @@ const Steps = ({ steps }) => {
                         <Text
                             style={[
                                 styles.stepLineText,
-                                styles.stepNoLineText,
+                                styles.stepOrderLineText,
                             ]}
                         >
-                            {`${s.stepNo}`}
+                            {`${s.stepOrder}`}
                         </Text>
                         <Text style={[styles.stepLineText]}>{s.step}</Text>
                     </View>

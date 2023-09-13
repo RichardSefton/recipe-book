@@ -15,6 +15,9 @@ export const recipeFormStyles = StyleSheet.create({
         marginBottom: 20,
         padding: 10,
         borderRadius: 5,
+        elevation: 5,
+        backgroundColor: "#fff",
+        marginTop: 10,
     },
     textArea: {
         height: 100,
@@ -24,6 +27,7 @@ export const recipeFormStyles = StyleSheet.create({
         fontSize: 16,
         fontWeight: "normal",
         borderRadius: 5,
+        elevation: 10,
     },
 });
 
@@ -36,15 +40,7 @@ export const ingredientsFormStyles = StyleSheet.create({
         backgroundColor: "#f2f0f7",
         zIndex: 1,
         borderTopRightRadius: 20,
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 10,
-            height: 10,
-        },
-        shadowRadius: 3.84,
-        elevation: 5,
-        opacity: 0.99,
-        shadowOpacity: 0.1,
+             elevation: 5,
     },
     ingredientsFormContainer: {
         width: "100%",
@@ -71,6 +67,10 @@ export const ingredientsFormStyles = StyleSheet.create({
         padding: 10,
         borderRadius: 5,
         textAlign: "center",
+        backgroundColor: "#fff",
+        elevation: 5,
+        borderTopRightRadius: 0,
+        borderBottomRightRadius: 0,
     },
     uomButton: {
         flex: 3,
@@ -82,6 +82,10 @@ export const ingredientsFormStyles = StyleSheet.create({
         padding: 10,
         borderRadius: 5,
         backgroundColor: "#f2f0f7",
+        backgroundColor: "#fff",
+        borderTopLeftRadius: 0,
+        borderBottomLeftRadius: 0,
+        // elevation: 5,
     },
     uomDropdown: {
         fontSize: 20,
@@ -91,6 +95,8 @@ export const ingredientsFormStyles = StyleSheet.create({
         marginBottom: 20,
         padding: 10,
         borderRadius: 5,
+        backgroundColor: "#fff",
+        elevation: 5,
     },
     buttonContainer: {
         width: "100%",
@@ -189,15 +195,7 @@ export const stepsFormStyles = StyleSheet.create({
         backgroundColor: "#f2f0f7",
         zIndex: 1,
         borderTopLeftRadius: 20,
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 10,
-            height: 10,
-        },
-        shadowRadius: 3.84,
         elevation: 5,
-        opacity: 0.99,
-        shadowOpacity: 0.1,
     },
     stepsFormContainer: {
         width: "100%",
@@ -227,6 +225,8 @@ export const stepsFormStyles = StyleSheet.create({
         fontWeight: "normal",
         borderRadius: 5,
         padding: 10,
+        backgroundColor: "#fff",
+        elevation: 5,
     },
     addStepButtonContainer: {
         width: "100%",
@@ -282,7 +282,7 @@ export const stepsFormStyles = StyleSheet.create({
         justifyContent: "flex-start",
         width: "70%",
     },
-    stepNoLineText: {
+    stepOrderLineText: {
         width: "10%",
         justifyContent: "flex-start",
         textAlign: "left",

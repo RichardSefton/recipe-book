@@ -53,7 +53,7 @@ export const selectStepForEdit = (state, action) => {
 export const cancelEditStep = (state) => {
     state.active.step = {
         id: '',
-        stepNo: '',
+        stepOrder: '',
         step: '',
     };
     state.active.editStep = false;
@@ -64,17 +64,17 @@ export const saveEditStep = (state, action) => {
     state.recipe.steps[index] = action.payload;
     state.active.step = {
         id: '',
-        stepNo: '',
+        stepOrder: '',
         step: '',
     };
     state.active.editStep = false;
 };
 export const deleteStep = (state, action) => {
-    //its not enough to just remove the step from the recipe, we also need to update the stepNo's for each step after the deleted step
+    //its not enough to just remove the step from the recipe, we also need to update the stepOrder's for each step after the deleted step
     state.recipe.steps = [...state.recipe.steps.filter(s => s.id !== action.payload.id)];
-    const sortedSteps = state.recipe.steps.sort((a, b) => a.stepNo - b.stepNo);
+    const sortedSteps = state.recipe.steps.sort((a, b) => a.stepOrder - b.stepOrder);
     sortedSteps.forEach((s, i) => {
-        s.stepNo = i + 1;
+        s.stepOrder = i + 1;
     });
     state.recipe.steps = sortedSteps;
 }

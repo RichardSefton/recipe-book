@@ -84,7 +84,7 @@ export const getRecipe = async (db, _id) => new Promise((resolve, reject) => {
                                         ...recipeResults.rows._array?.[0],
                                         ingredients,
                                         steps: steps
-                                                .map(s => ({ ...s, stepNo: s.stepOrder }))
+                                                .map(s => ({ ...s, stepOrder: s.stepOrder }))
                                                 .sort((a, b) => a.stepOrder - b.stepOrder) 
                                     });
                                 },

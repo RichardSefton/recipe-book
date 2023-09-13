@@ -47,7 +47,7 @@ const EditIngredientsForm = ({ activeIngredient }) => {
                 <TextInput
                     style={styles.qtyTextInput}
                     onChange={(e) => setQty(e.nativeEvent.text)}
-                    value={qty}
+                    value={typeof qty === 'string' ? qty : qty.toString()}
                     placeholder="Quantity"
                     inputMode="numeric"
                 />

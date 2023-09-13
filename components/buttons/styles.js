@@ -25,15 +25,7 @@ export const buttonStyle = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         // flex: 1,
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 10,
-            height: 10,
-        },
-        shadowRadius: 3.84,
-        elevation: 15,
-        opacity: 0.99,
-        shadowOpacity: 0.1,
+        elevation: 5,
     },
     buttonSmall: {
         borderWidth: 1,
@@ -47,15 +39,7 @@ export const buttonStyle = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         // flex: 1,
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 10,
-            height: 10,
-        },
-        shadowRadius: 3.84,
-        elevation: 15,
-        opacity: 0.99,
-        shadowOpacity: 0.1,
+        elevation: 5,
     },
     buttonLargeText: {
         color: "#7542f5",
@@ -90,15 +74,7 @@ export const buttonStyle = StyleSheet.create({
         textAlign: "center",
         justifyContent: "center",
         zIndex: 99,
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 5,
-            height: 5,
-        },
-        shadowRadius: 3.84,
-        elevation: 25,
-        opacity: 1,
-        shadowOpacity: 0.9,
+        elevation: 50,
     },
     disabled: {
         borderColor: "#ccc",
@@ -120,12 +96,14 @@ export const buttonStylePressed = StyleSheet.create({
         backgroundColor: "#7542f5",
         borderColor: "#fff",
         transform: [{ translateY: 2 }],
+        elevation: 1,
     },
     buttonSmall: {
         ...buttonStyle.buttonSmall,
         backgroundColor: "#7542f5",
         borderColor: "#fff",
         transform: [{ translateY: 2 }],
+        elevation: 1,
     },
     buttonLargeText: {
         ...buttonStyle.buttonLargeText,
@@ -146,6 +124,7 @@ export const buttonStylePressed = StyleSheet.create({
     buttonRectangle: {
         ...buttonStyle.buttonRectangle,
         backgroundColor: "#5530b8",
+        elevation: 10,
     },
 });
 

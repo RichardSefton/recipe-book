@@ -4,6 +4,7 @@ export const recipeListStyle = StyleSheet.create({
     container: {
         flex: 1,
         width: "100%",
+        backgroundColor: "#f2f2f2",
     },
     buttonContainer: {
         justifyContent: "center",
@@ -15,10 +16,13 @@ export const recipeCardStyle = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: "row",
-        backgroundColor: "#F5F0FF",
+        borderColor: "#7542f5",
+        borderTopWidth: 1,
+        borderBottomWidth: 1,
         width: "100%",
         marginTop: 10,
         height: 75,
+        backgroundColor: "#fff",
     },
     details: {
         flex: 30,
@@ -67,15 +71,7 @@ export const longPressStyle = StyleSheet.create({
         height: "90%",
         width: "90%",
         margin: 10,
-        shadowColor: "#000",
-        borderRadius: 5,
-        shadowOffset: {
-            width: 10,
-            height: 10,
-        },
-        shadowRadius: 15,
         elevation: 20,
-        shadowOpacity: 0.5,
     },
     buttonEdit: {
         backgroundColor: "#00FF00",
@@ -84,15 +80,8 @@ export const longPressStyle = StyleSheet.create({
         height: "90%",
         width: "90%",
         margin: 10,
-        shadowColor: "#000",
         borderRadius: 5,
-        shadowOffset: {
-            width: 10,
-            height: 10,
-        },
-        shadowRadius: 15,
         elevation: 20,
-        shadowOpacity: 0.5,
     },
     buttonCancel: {
         backgroundColor: "#0000FF",

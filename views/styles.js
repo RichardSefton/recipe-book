@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
     },
     modalContainer: {
         flex: 1,
-        backgroundColor: "#fff",
+        backgroundColor: "#f2f2f2",
         // paddingTop: Platform.OS === "android" ? 40 : 0,
         // alignItems: "center",
         // justifyContent: "center",
