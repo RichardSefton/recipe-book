@@ -66,9 +66,19 @@ const Navigator = ({ loading, progress }) => {
     return (
         <NavigationContainer ref={navigationRef}>
             <Stack.Navigator initialRouteName="RecipeList">
-                <Stack.Group screenOptions={viewOptions}>
-                    <Stack.Screen name="RecipeList" component={RecipeList} />
-                </Stack.Group>
+                {/* 
+                    Latest version of navigator incompatiable with snacks 
+                    apparently. What a good system :)
+                */}
+                {/* <Stack.Group screenOptions={viewOptions}> */}
+                    <Stack.Screen 
+                        name="RecipeList" 
+                        component={RecipeList} 
+                        options={{
+                            headerShown: false,
+                        }}
+                    />
+                {/* </Stack.Group> */}
                 {/* 
                         I think modal only works in ios.
 
@@ -82,7 +92,7 @@ const Navigator = ({ loading, progress }) => {
                         At least in groups, they will behave differently on 
                         android devices. good enough. 
                     */}
-                <Stack.Group screenOptions={modalOptions}>
+                {/* <Stack.Group screenOptions={modalOptions}> */}
                     <Stack.Screen name="Recipe" component={Recipe} />
                     <Stack.Screen
                         name="NewRecipe"
@@ -98,7 +108,7 @@ const Navigator = ({ loading, progress }) => {
                             headerTitle: "Edit Recipe",
                         }}
                     />
-                </Stack.Group>
+                {/* </Stack.Group> */}
             </Stack.Navigator>
             <Menu navigationRef={navigationRef} />
         </NavigationContainer>

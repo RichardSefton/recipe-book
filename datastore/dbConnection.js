@@ -18,13 +18,15 @@ export const createTables = (conn) => new Promise((resolve, reject) => {
         (tx) => {
             tx.executeSql(
                 `
-                CREATE TABLE IF NOT EXISTS ${tables.RECIPES} (
-                    id VARCHAR(36) PRIMARY KEY,
-                    name VARCHAR(128),
-                    description VARCHAR(512)
-                )
-            `,
-                []
+                    CREATE TABLE IF NOT EXISTS ${tables.RECIPES} (
+                        id VARCHAR(36) PRIMARY KEY,
+                        name VARCHAR(128),
+                        description VARCHAR(512)
+                    )
+                `,
+                [],
+                () => console.log("CREATED RECIPES TABLE"),
+                (error) => console.error(error)
             );
             tx.executeSql(
                 `

@@ -10,9 +10,11 @@ const Menu = ({ navigationRef, recipe }) => {
     //return true if in development mode
     const [route, setRoute] = useState('');
 
-    const navigation = useNavigation();
+    const { navigate } = navigationRef.current || {};
+    console.log(navigate);
     const dispatch = useDispatch();
     useEffect(() => {
+        console.log(navigationRef.current);
         setRoute(navigationRef.current.getCurrentRoute().name);
         navigationRef.current.addListener('state', (e) => {
             setRoute(e.data?.state?.routes?.[e.data?.state?.index]?.name)
@@ -26,7 +28,7 @@ const Menu = ({ navigationRef, recipe }) => {
 
     const handleNewRecipe = () => {
         dispatch(clearRecipe());
-        navigation.navigate("NewRecipe");
+        navigate("NewRecipe");
     };
 
     const openIngredientsCard = () => {
@@ -38,7 +40,7 @@ const Menu = ({ navigationRef, recipe }) => {
 
     const handleSaveRecipe = () => {
         dispatch(createRecipe())
-            .then(() => navigation.navigate("RecipeList"))
+            .then(() => navigate("RecipeList"))
             .catch((err) => console.error(err));
     };
 
@@ -46,7 +48,7 @@ const Menu = ({ navigationRef, recipe }) => {
         dispatch(editRecipe())
             .then(() => {
                 dispatch(loadRecipes());        
-                navigation.navigate("RecipeList")
+                navigate("RecipeList")
             })
             .catch((err) => console.error(err));
     }
