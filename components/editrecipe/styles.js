@@ -429,4 +429,18 @@ export const recipeImageStyles = StyleSheet.create({
         width: 200,
         height: 200,
     },
+    deleteIconContainer: {
+        position: "relative",
+        marginTop: 10,
+        top: 20,
+        right: 30,
+        zIndex: 1,
+    },
+    deleteIcon: {
+        zIndex: 1,
+        height: 20,
+        width: 20,
+        //set the colour to purple
+        tintColor: "#7542f5",
+    }
 }); 

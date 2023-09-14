@@ -5,7 +5,8 @@ import {
     createRecipe as createRecipeRecord, 
     deleteRecipe as deleteRecipeRecord,  
     editRecipe as editRecipeRecord,
-    insertRecipeImage as insertRecipeImageRecord
+    insertRecipeImage as insertRecipeImageRecord,
+    deleteRecipeImage as deleteRecipeImageRecord,
 } from "../../datastore";
 import uuid from "react-native-uuid";
 import { validateNewRecipe } from "./validation";
@@ -25,6 +26,12 @@ export const setRecipeDescription = (state, action) => {
 
 export const addRecipeImage = (state, action) => {
     state.recipe.images.push({ base64: action.payload, id: uuid.v4() });
+};
+
+export const removeRecipeImage = (state, action) => {
+    state.recipe.images = [
+        ...state.recipe.images.filter((img) => img.id !== action.payload.id),
+    ];
 };
 
 export const addIngredient = (state, action) => {
@@ -204,6 +211,22 @@ export const insertRecipeImage = createAsyncThunk(
             const newImage = { base64: image, id: uuid.v4() };
             await insertRecipeImageRecord(database, {recipeId: recipe.id, image: newImage});
             return newImage;
+        } catch (error) {
+            console.error(error);
+            return rejectWithValue(error);
+        }
+    }
+);
+
+export const deleteRecipeImage = createAsyncThunk(
+    "recipe/deleteRecipeImage",
+    async (imageId, { getState, rejectWithValue, dispatch }) => {
+        const {
+            appSlice: { database },
+        } = getState();
+        try {
+            await deleteRecipeImageRecord(database, { imageId });
+            return imageId;
         } catch (error) {
             console.error(error);
             return rejectWithValue(error);

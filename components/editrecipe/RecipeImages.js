@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState, Fragment } from 'react';
 import { View, Text, Image, Platform, ScrollView, Pressable } from 'react-native';
 import { recipeImageStyles as styles } from "./styles";
 import * as ImagePicker from 'expo-image-picker';
@@ -6,14 +6,24 @@ import { connect, useDispatch } from 'react-redux';
 import {
     addRecipeImage,
     insertRecipeImage,
+    deleteRecipeImage,
+    removeRecipeImage,
 } from "../../redux/recipeSlice/slice";
 import { RectangleButton } from '../buttons';
+import { buttonImages } from '../buttons';
 
 const RecipeImages = ({ images, isNewRecipe }) => {
     const dispatch = useDispatch();
     const [selectedImage, setSelectedImage] = useState(null);
 
     const shouldDisplayImages = useMemo(() => !!images?.length, [images]);
+
+    useEffect(() => {
+        if (!selectedImage) return;
+        if (!images.find(img => img.id === selectedImage.id)) {
+            setSelectedImage(null);
+        }
+    }, [images]);
 
     const pickImage = async () => {
         //request permission to access the user's media library
@@ -80,12 +90,20 @@ const RecipeImages = ({ images, isNewRecipe }) => {
                     scrollEnabled={true} 
                 >
                         {images.map((img) => (
-                            <Pressable key={img.id} onPress={() => setSelectedImage(img)}>
-                                <Image
-                                    source={{ uri: `data:image/png;base64,${img.base64}` }}
-                                    style={styles.image}
-                                />
-                            </Pressable>
+                            <Fragment key={img.id}>
+                                <Pressable onPress={() => setSelectedImage(img)}>
+                                    <Image
+                                        source={{ uri: `data:image/png;base64,${img.base64}` }}
+                                        style={styles.image}
+                                    />
+                                </Pressable>
+                                <Pressable 
+                                    style={styles.deleteIconContainer}
+                                    onPress={() => isNewRecipe ? dispatch(removeRecipeImage({ id: img.id })) : dispatch(deleteRecipeImage(img.id))}
+                                >
+                                    <Image source={buttonImages.DELETE.uri} style={styles.deleteIcon} />
+                                </Pressable>
+                            </Fragment>
                         ))}
                 </ScrollView>
             )}

@@ -6,6 +6,7 @@ import {
     deleteRecipe,
     editRecipe,
     insertRecipeImage,
+    deleteRecipeImage,
 } from "./recipe";
 
 export {
@@ -17,4 +18,5 @@ export {
     deleteRecipe,
     editRecipe,
     insertRecipeImage,
-}
+    deleteRecipeImage,
+};

@@ -235,3 +235,20 @@ export const insertRecipeImage = (db, {image, recipeId}) => new Promise((resolve
         error => reject(error)
     );
 });
+
+export const deleteRecipeImage = (db, {imageId}) => new Promise((resolve, reject) => {
+    const query = `
+        DELETE FROM ${tables.RECIPEIMAGES} WHERE id = ?
+    `;
+    db.transaction(
+        tx => {
+            tx.executeSql(
+                query,
+                [imageId],
+                () => resolve(),
+                (error) => reject(error)
+            );
+        },
+        error => reject(error)
+    );
+});

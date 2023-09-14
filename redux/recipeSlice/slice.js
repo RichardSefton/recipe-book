@@ -7,9 +7,11 @@ import {
     deleteRecipe,
     editRecipe,
     insertRecipeImage,
+    deleteRecipeImage,
     setRecipeName as setRecipeNameAction,
     setRecipeDescription as setRecipeDescriptionAction,
     addRecipeImage as addRecipeImageAction,
+    removeRecipeImage as removeRecipeImageAction,
     addIngredient as addIngredientAction,
     toggleShowIngredients as toggleShowIngredientsAction,
     toggleShowSteps as toggleShowStepsAction,
@@ -77,6 +79,7 @@ const recipeSlice = createSlice({
         setRecipeName: setRecipeNameAction,
         setRecipeDescription: setRecipeDescriptionAction,
         addRecipeImage: addRecipeImageAction,
+        removeRecipeImage: removeRecipeImageAction,
         addIngredient: addIngredientAction,
         addStep: addStepAction,
         toggleShowIngredients: toggleShowIngredientsAction,
@@ -168,6 +171,16 @@ const recipeSlice = createSlice({
         builder.addCase(insertRecipeImage.rejected, (state, action) => {
             console.error('insert recipe image error', action.error);
         });
+        builder.addCase(deleteRecipeImage.pending, (state) => {
+            //nothing to do here...
+        });
+        builder.addCase(deleteRecipeImage.fulfilled, (state, action) => {
+            //remove the image from state
+            state.recipe.images = state.recipe.images.filter(img => img.id !== action.payload);
+        });
+        builder.addCase(deleteRecipeImage.rejected, (state, action) => {
+            console.error('delete recipe image error', action.error);
+        });
     }
 });
 
@@ -178,12 +191,14 @@ export {
     deleteRecipe,
     editRecipe,
     insertRecipeImage,
+    deleteRecipeImage,
 };
 
 export const { 
     setRecipeName, 
     setRecipeDescription,
     addRecipeImage,
+    removeRecipeImage,
     addIngredient,
     addStep,
     toggleShowIngredients,
