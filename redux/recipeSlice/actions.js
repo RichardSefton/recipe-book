@@ -52,10 +52,12 @@ export const clearSteps = (state) => {
 
 export const toggleShowIngredients = (state) => {
     state.showIngredients = !state.showIngredients;
+    state.showSteps = false;
 };
 
 export const toggleShowSteps = (state) => {
     state.showSteps = !state.showSteps;
+    state.showIngredients = false;
 };
 
 export const selectStepForEdit = (state, action) => {
