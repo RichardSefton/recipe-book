@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { BlurView } from 'expo-blur';
 import { Animated } from 'react-native';
 import { connect } from 'react-redux';
 import { ingredientsFormStyles as styles } from './styles';
@@ -29,21 +30,18 @@ const IngredientsCard = ({ showIngredients, editIngredient }) => {
     });
 
     return (
-        <Animated.View style={[
-                styles.ingredientsContainer, 
-                { 
-                    transform: [{ translateY }, { translateX }]
-                }
+        <Animated.View
+            style={[
+                styles.ingredientsContainer,
+                {
+                    transform: [{ translateY }, { translateX }],
+                },
             ]}
         >
-            {
-                editIngredient ? (
-                    <EditIngredientsForm />
-                ) : (
-                    <IngredientsForm />
-                )
-            }
-            <Ingredients />
+            <BlurView intensity={80} tint="light" style={{ height: "100%" }}>
+                {editIngredient ? <EditIngredientsForm /> : <IngredientsForm />}
+                <Ingredients />
+            </BlurView>
         </Animated.View>
     );
 }

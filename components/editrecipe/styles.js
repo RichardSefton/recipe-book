@@ -41,6 +41,7 @@ export const ingredientsFormStyles = StyleSheet.create({
         zIndex: 1,
         borderTopRightRadius: 20,
         elevation: 5,
+        opacity: 0.8,
     },
     ingredientsFormContainer: {
         width: "100%",
@@ -196,6 +197,7 @@ export const stepsFormStyles = StyleSheet.create({
         zIndex: 1,
         borderTopLeftRadius: 20,
         elevation: 5,
+        opacity: 0.8,
     },
     stepsFormContainer: {
         width: "100%",

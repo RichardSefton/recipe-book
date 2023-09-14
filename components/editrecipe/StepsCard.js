@@ -5,6 +5,7 @@ import { stepsFormStyles as styles } from "./styles";
 import StepsForm from "./StepsForm";
 import Steps from "./Steps";
 import EditStepsForm from './EditStepsForm';
+import { BlurView } from "expo-blur";
 
 const StepsCard = ({ showSteps, editStep }) => {
     const slideAnim = useRef(new Animated.Value(0)).current;
@@ -37,14 +38,16 @@ const StepsCard = ({ showSteps, editStep }) => {
                 },
             ]}
         >
-            { 
-                editStep ? (
-                    <EditStepsForm />
-                ) : (
-                    <StepsForm />
-                )
-            }
-            <Steps />
+            <BlurView intensity={80} tint="light" style={{height: "100%"}}>
+                { 
+                    editStep ? (
+                        <EditStepsForm />
+                    ) : (
+                        <StepsForm />
+                    )
+                }
+                <Steps />
+            </BlurView>
         </Animated.View>
     );
 };
