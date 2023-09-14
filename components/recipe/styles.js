@@ -112,7 +112,6 @@ export const ingredientsStyles = StyleSheet.create({
 export const recipeImageStyles = StyleSheet.create({
     container: {
         // height: "100%",
-        backgroundColor: "#f00"
     },
     buttonsContainer: {
         flexDirection: "row",
@@ -132,12 +131,9 @@ export const recipeImageStyles = StyleSheet.create({
     imagesContainer: {
         flexDirection: "row",
         flexWrap: "wrap",
-        // justifyContent: 'flex-start',
-        // flexDirection: 'column',
         height: 120,
         justifyContent: "space-evenly",
         marginTop: 10,
-        backgroundColor: "#0f0"
     },
     image: {
         margin: 10,
@@ -145,15 +141,12 @@ export const recipeImageStyles = StyleSheet.create({
         height: 100,
     },
     selectedImageContainer: {
-        // position: "absolute",
-        // height: 580,
-        backgroundColor: "#00f",
         width: "100%",
         justifyContent: "center",
         alignItems: "center",
     },
     selectedImage: {
-        width: 200,
-        height: 200,
+        width: 300,
+        height: 300,
     },
 }); 

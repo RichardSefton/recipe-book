@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { View, TextInput, Text } from "react-native";
+import { View, TextInput, Text, Keyboard } from "react-native";
 import {
     stepsFormStyles as styles,
 } from "./styles";
@@ -22,6 +22,7 @@ const StepsForm = ({ steps }) => {
         if (!(!!step)) return;
         dispatch(addStep({ stepOrder: steps.length + 1, step }));
         setStep("");
+        Keyboard.dismiss();
     };
 
     return (

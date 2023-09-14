@@ -19,9 +19,6 @@ const Steps = ({ steps }) => {
         setStepsToDelete([...stepsToDelete?.filter(s => !remove.includes(s))]);
     }, [steps]);
 
-    // console.log('steps', steps);
-    // console.log('stepsToDelete', stepsToDelete);
-
     const handleEditStep = (step) => {
         dispatch(selectStepForEdit(step));
     };

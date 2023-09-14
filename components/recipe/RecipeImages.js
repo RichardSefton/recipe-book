@@ -9,7 +9,6 @@ const RecipeImages = ({ images }) => {
     const shouldDisplayImages = useMemo(() => !!images?.length, [images]);
 
     return (
-        // <View style={styles.container}>
         <>
             {shouldDisplayImages && (
                 <ScrollView
@@ -41,13 +40,9 @@ const RecipeImages = ({ images }) => {
                 </View>
             )}
         </>
-        // </View>
     );
 };
 
-export default connect(({ recipeSlice }) => {
-    console.log('recipeSlice: ', recipeSlice);
-    return { 
-        images: recipeSlice.recipe.images, 
-    }
-})(RecipeImages);
+export default connect(({ recipeSlice }) => ({ 
+    images: recipeSlice.recipe.images, 
+}))(RecipeImages);

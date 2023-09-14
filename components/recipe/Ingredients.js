@@ -4,7 +4,6 @@ import { ScrollView, View, Text } from "react-native";
 import { ingredientsStyles as styles } from "./styles";
 
 const Ingredients = ({ ingredients }) => {
-    //console.log(ingredients);
     
     return (
         <ScrollView

@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { View, TextInput, Text } from 'react-native';
+import { View, TextInput, Text, Keyboard } from 'react-native';
 import { ingredientsFormStyles as styles, recipeFormStyles as recipeStyles } from './styles';
 import SelectDropdown from 'react-native-select-dropdown';
 import { uoms } from './uoms';
@@ -31,6 +31,7 @@ const IngredientsForm = ({ }) => {
         setQuantity("");
         setUom("");
         if (dropdownRef.current) dropdownRef.current.reset();
+        Keyboard.dismiss();
     };
 
     return (

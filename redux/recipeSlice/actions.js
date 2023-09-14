@@ -5,6 +5,7 @@ import {
     createRecipe as createRecipeRecord, 
     deleteRecipe as deleteRecipeRecord,  
     editRecipe as editRecipeRecord,
+    insertRecipeImage as insertRecipeImageRecord
 } from "../../datastore";
 import uuid from "react-native-uuid";
 import { validateNewRecipe } from "./validation";
@@ -154,7 +155,6 @@ export const loadRecipe = createAsyncThunk("recipe/loadRecipe", async (id, { get
     }
 );
 
-
 export const createRecipe = createAsyncThunk('recipe/createRecipe', async (_, { getState, rejectWithValue, dispatch }) => {
     const { appSlice: { database }, recipeSlice: { recipe }} = getState();
     try {
@@ -192,3 +192,21 @@ export const deleteRecipe = createAsyncThunk('recipe/deleteRecipe', async (recip
         return rejectWithValue(error);
     }
 });
+
+export const insertRecipeImage = createAsyncThunk(
+    "recipe/insertRecipeImage",
+    async (image, { getState, rejectWithValue, dispatch }) => {
+        const {
+            appSlice: { database },
+            recipeSlice: { recipe },
+        } = getState();
+        try {
+            const newImage = { base64: image, id: uuid.v4() };
+            await insertRecipeImageRecord(database, {recipeId: recipe.id, image: newImage});
+            return newImage;
+        } catch (error) {
+            console.error(error);
+            return rejectWithValue(error);
+        }
+    }
+);

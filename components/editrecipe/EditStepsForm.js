@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { View, TextInput, Text } from 'react-native';
+import { View, TextInput, Text, Keyboard } from 'react-native';
 import { RectangleButton as Button } from '../buttons';
 import { connect, useDispatch } from 'react-redux';
 import { cancelEditStep, saveEditStep } from '../../redux/recipeSlice/slice';
@@ -17,10 +17,12 @@ const EditStepsForm = ({ activeStep }) => {
 
     const handleUpdateStep = () => {
         dispatch(saveEditStep({ ...activeStep, step }));
+        Keyboard.dismiss();
     };
 
     const handleCancelUpdateStep = () => {
         dispatch(cancelEditStep());
+        Keyboard.dismiss();
     };
 
     return (

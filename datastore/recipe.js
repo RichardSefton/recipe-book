@@ -214,3 +214,24 @@ export const editRecipe = (db, recipe) => new Promise((resolve, reject) => {
         (error) => reject(error)
     );
 });
+
+//Image amendments should be handled separately from the recipe.
+//Creation can all be done at once but editing and deleting will be 
+//difficult to track changes. So they will be handled as and when they
+//are added and deleted. 
+export const insertRecipeImage = (db, {image, recipeId}) => new Promise((resolve, reject) => {
+    const query = `
+        INSERT INTO ${tables.RECIPEIMAGES} (id, recipeId, base64) values(?, ?, ?)
+    `;
+    db.transaction(
+        tx => {
+            tx.executeSql(
+                query,
+                [image.id, recipeId, image.base64],
+                () => resolve(),
+                (error) => reject(error)
+            );
+        },
+        error => reject(error)
+    );
+});

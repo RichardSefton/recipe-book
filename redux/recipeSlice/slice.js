@@ -6,6 +6,7 @@ import {
     createRecipe,
     deleteRecipe,
     editRecipe,
+    insertRecipeImage,
     setRecipeName as setRecipeNameAction,
     setRecipeDescription as setRecipeDescriptionAction,
     addRecipeImage as addRecipeImageAction,
@@ -146,7 +147,7 @@ const recipeSlice = createSlice({
             //be idiotic as the next reload they would have it back again. 
             //And there is no real mechanism yet to notify the users so I guess this
             //is just somewhere for the rejection to go...
-            console.log(action.error);
+            console.error(action.error);
         });
         builder.addCase(editRecipe.pending, (state) => {
             //really not much to do here. the action should be quick anyway. 
@@ -157,10 +158,27 @@ const recipeSlice = createSlice({
         builder.addCase(editRecipe.rejected, (state, action) => {
             console.error('update recipe error', action.error);
         });
+        builder.addCase(insertRecipeImage.pending, (state) => {
+            //nothing to do here...
+        });
+        builder.addCase(insertRecipeImage.fulfilled, (state, action) => {
+            //make sure the image is in state
+            state.recipe.images.push(action.payload);
+        });
+        builder.addCase(insertRecipeImage.rejected, (state, action) => {
+            console.error('insert recipe image error', action.error);
+        });
     }
 });
 
-export { createRecipe, loadRecipes, loadRecipe, deleteRecipe, editRecipe };
+export {
+    createRecipe,
+    loadRecipes,
+    loadRecipe,
+    deleteRecipe,
+    editRecipe,
+    insertRecipeImage,
+};
 
 export const { 
     setRecipeName, 

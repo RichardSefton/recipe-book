@@ -1,5 +1,12 @@
 import { openDb, createTables } from './dbConnection';
-import { getRecipes, getRecipe, createRecipe, deleteRecipe, editRecipe } from "./recipe";
+import {
+    getRecipes,
+    getRecipe,
+    createRecipe,
+    deleteRecipe,
+    editRecipe,
+    insertRecipeImage,
+} from "./recipe";
 
 export {
     openDb,
@@ -9,4 +16,5 @@ export {
     createRecipe,
     deleteRecipe,
     editRecipe,
+    insertRecipeImage,
 }

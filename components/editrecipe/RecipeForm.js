@@ -1,11 +1,11 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { TextInput, View } from 'react-native';
 import { recipeFormStyles as styles } from "./styles";
 import { setRecipeName, setRecipeDescription, clearIngredients, clearSteps } from '../../redux/recipeSlice/slice';
 import RecipeImages from './RecipeImages';
 
-const RecipeForm = ({ recipeName, recipeDescription }) => {
+const RecipeForm = ({ recipeName, recipeDescription, recipeId }) => {
     const dispatch = useDispatch();
 
     const handleRecipeNameChange = name => dispatch(setRecipeName(name));
@@ -20,6 +20,8 @@ const RecipeForm = ({ recipeName, recipeDescription }) => {
             dispatch(clearSteps());
         }
     }, []);
+
+    const isNewRecipe = useMemo(() => !(!!recipeId), [recipeId]);
 
     return (
         <View style={styles.RecipeFormContainer}>
@@ -37,7 +39,7 @@ const RecipeForm = ({ recipeName, recipeDescription }) => {
                 multiline={true}
                 numberOfLines={5}
             />
-            <RecipeImages />
+            <RecipeImages isNewRecipe={isNewRecipe} />
         </View>
     );
 };

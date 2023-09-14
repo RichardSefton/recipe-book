@@ -3,10 +3,13 @@ import { View, Text, Image, Platform, ScrollView, Pressable } from 'react-native
 import { recipeImageStyles as styles } from "./styles";
 import * as ImagePicker from 'expo-image-picker';
 import { connect, useDispatch } from 'react-redux';
-import { addRecipeImage } from '../../redux/recipeSlice/slice';
+import {
+    addRecipeImage,
+    insertRecipeImage,
+} from "../../redux/recipeSlice/slice";
 import { RectangleButton } from '../buttons';
 
-const RecipeImages = ({ images }) => {
+const RecipeImages = ({ images, isNewRecipe }) => {
     const dispatch = useDispatch();
     const [selectedImage, setSelectedImage] = useState(null);
 
@@ -31,7 +34,7 @@ const RecipeImages = ({ images }) => {
                 });
 
                 result?.assets?.forEach((img) =>
-                    dispatch(addRecipeImage(img.base64))
+                    isNewRecipe ? dispatch(addRecipeImage(img.base64)) : dispatch(insertRecipeImage(img.base64))
                 );
 
             }
@@ -54,7 +57,7 @@ const RecipeImages = ({ images }) => {
             });
 
             result?.assets?.forEach(img => 
-                dispatch(addRecipeImage(img.base64))
+                isNewRecipe ? dispatch(addRecipeImage(img.base64)) : dispatch(insertRecipeImage(img.base64))
             );
         }
     };

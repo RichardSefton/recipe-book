@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { View, TextInput, Text } from "react-native";
+import { View, TextInput, Text, Keyboard } from "react-native";
 import { RectangleButton as Button } from "../buttons";
 import { connect, useDispatch } from "react-redux";
 import { cancelEditIngredient, saveEditIngredient } from "../../redux/recipeSlice/slice";
@@ -29,10 +29,12 @@ const EditIngredientsForm = ({ activeIngredient }) => {
 
     const handleUpdateIngredient = () => {
         dispatch(saveEditIngredient({ ...activeIngredient, ingredient: ingredient, quantity: qty, uom: uom }));
+        Keyboard.dismiss();
     };
 
     const handleCancelUpdateIngredient = () => {
         dispatch(cancelEditIngredient());
+        Keyboard.dismiss();
     };
 
     return (
