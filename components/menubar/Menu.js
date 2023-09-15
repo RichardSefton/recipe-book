@@ -11,10 +11,8 @@ const Menu = ({ navigationRef, recipe }) => {
     const [route, setRoute] = useState('');
 
     const { navigate } = navigationRef.current || {};
-    console.log(navigate);
     const dispatch = useDispatch();
     useEffect(() => {
-        console.log(navigationRef.current);
         setRoute(navigationRef.current.getCurrentRoute().name);
         navigationRef.current.addListener('state', (e) => {
             setRoute(e.data?.state?.routes?.[e.data?.state?.index]?.name)

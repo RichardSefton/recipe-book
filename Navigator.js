@@ -2,6 +2,7 @@ import { useRef, useEffect, useMemo } from 'react';
 import { SafeAreaView, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { enableScreens } from "react-native-screens";
 import { RecipeList, Recipe, NewRecipe, EditRecipe } from "./views";
 import { AppStyle } from "./styles";
 import { Menu } from "./components/menubar";
@@ -13,6 +14,7 @@ const Navigator = ({ loading, progress }) => {
     const Stack = createNativeStackNavigator();
     const navigationRef = useRef(null);
     const dispatch = useDispatch();
+    enableScreens(true);
 
     //memoize the options so that they don't get recreated
     //every time the component re-renders
