@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 
 export const recipeFormStyles = StyleSheet.create({
     RecipeFormContainer: {
@@ -32,6 +32,9 @@ export const recipeFormStyles = StyleSheet.create({
 });
 
 export const ingredientsFormStyles = StyleSheet.create({
+    //Apparently on an iPhone the blur component doesn't work properly
+    //So we need to make sure the opacity only happens on Android.
+    //I've seen the screenshots. It's not pretty on an iPhone
     ingredientsContainer: {
         position: "absolute",
         bottom: 0,
@@ -41,7 +44,7 @@ export const ingredientsFormStyles = StyleSheet.create({
         zIndex: 1,
         borderTopRightRadius: 20,
         elevation: 5,
-        opacity: 0.8,
+        opacity: Platform.OS === "android" ? 0.8 : 1,
     },
     ingredientsFormContainer: {
         width: "100%",
@@ -187,6 +190,9 @@ export const ingredientsFormStyles = StyleSheet.create({
 });
 
 export const stepsFormStyles = StyleSheet.create({
+    //Apparently on an iPhone the blur component doesn't work properly
+    //So we need to make sure the opacity only happens on Android.
+    //I've seen the screenshots. It's not pretty on an iPhone
     stepsContainer: {
         position: "absolute",
         bottom: 0,
@@ -197,7 +203,7 @@ export const stepsFormStyles = StyleSheet.create({
         zIndex: 1,
         borderTopLeftRadius: 20,
         elevation: 5,
-        opacity: 0.8,
+        opacity: Platform.OS === "android" ? 0.8 : 1,
     },
     stepsFormContainer: {
         width: "100%",

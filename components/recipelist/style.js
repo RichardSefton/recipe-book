@@ -65,7 +65,7 @@ export const longPressStyle = StyleSheet.create({
         alignItems: "center",
     },
     buttonDelete: {
-        backgroundColor: "#FF0000",
+        backgroundColor: "#7542f5",
         justifyContent: "center",
         alignItems: "center",
         height: "90%",
@@ -74,34 +74,25 @@ export const longPressStyle = StyleSheet.create({
         elevation: 20,
     },
     buttonEdit: {
-        backgroundColor: "#00FF00",
+        backgroundColor: "#7542f5",
         justifyContent: "center",
         alignItems: "center",
         height: "90%",
         width: "90%",
         margin: 10,
-        borderRadius: 5,
         elevation: 20,
     },
     buttonCancel: {
-        backgroundColor: "#0000FF",
+        backgroundColor: "#7542f5",
         justifyContent: "center",
         alignItems: "center",
         height: "90%",
         width: "90%",
-        shadowColor: "#000",
-        borderRadius: 5,
-        shadowOffset: {
-            width: 10,
-            height: 10,
-        },
-        shadowRadius: 15,
         elevation: 20,
-        shadowOpacity: 0.5,
     },
     buttonText: {
         fontSize: 16,
         color: "#fff",
         fontWeight: "bold",
-    }
+    },
 });

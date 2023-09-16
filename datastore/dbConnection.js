@@ -88,11 +88,11 @@ const primeDb = (conn) => new Promise((resolve, reject) => {
     conn.transaction(
         tx => {
             //clear down the database for consistent data
-            tx.executeSql(`DELETE FROM ${tables.STEPS} WHERE recipeId = '1' OR recipeId = 2`, []);
-            tx.executeSql(`DELETE FROM ${tables.INGREDIENTS} recipeId = '1' OR recipeId = 2`, []);
-            tx.executeSql(`DELETE FROM ${tables.RECIPEIMAGES} recipeId = '1' OR recipeId = 2`, []);
+            tx.executeSql(`DELETE FROM ${tables.STEPS} WHERE recipeId = '1' OR recipeId = '2'`, []);
+            tx.executeSql(`DELETE FROM ${tables.INGREDIENTS} WHERE recipeId = '1' OR recipeId = '2'`, []);
+            tx.executeSql(`DELETE FROM ${tables.RECIPEIMAGES} WHERE recipeId = '1' OR recipeId = '2'`, []);
             tx.executeSql(
-                `DELETE FROM ${tables.RECIPES} id = '1' OR id = 2`,
+                `DELETE FROM ${tables.RECIPES} WHERE id = '1' OR id = '2'`,
                 []
             );
             console.log("CLEARED DATA");
